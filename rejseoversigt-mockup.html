@@ -1315,27 +1315,28 @@ a {
     .filter-pill[data-theme="maler"]     { background: #892315; }
     .filter-pill[data-theme="trekking"]  { background: #83663D; }
 
-    /* "?" info button + collapsible panel */
-    .filter-info {
-      margin-left: auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: none;
-      border: 1px solid #c9c0b6;
+    /* Helper text + link to open the theme info panel */
+    .filter-help {
+      margin: 4px 0 24px;
       color: #6c6258;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      cursor: pointer;
       font-size: 14px;
-      font-weight: 600;
-      font-family: inherit;
-      transition: background 0.18s, color 0.18s, border-color 0.18s;
-      justify-content: center;
+      line-height: 1.55;
+      max-width: 720px;
     }
-    .filter-info:hover { background: #ede5d9; color: #2c2c2c; border-color: #6c6258; }
-    .filter-info.open  { background: #2c2c2c; color: #fff; border-color: #2c2c2c; }
+    .filter-info-link {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #2c2c2c;
+      font-weight: 600;
+      font-size: inherit;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.18s ease;
+    }
+    .filter-info-link:hover { color: #000; }
 
     .theme-info-panel {
       display: none;
@@ -1412,8 +1413,11 @@ a {
         <span class="filter-icon bjerg"></span>
         <span class="filter-label">Bjergbestigning</span>
       </button>
-      <button class="filter-info" type="button" aria-expanded="false" aria-controls="theme-info" title="Læs om rejsetyperne">?</button>
     </div>
+
+    <p class="filter-help">
+      Vores rejser til Marokko er fordelt på temaer. Klik på et tema ovenfor for at filtrere visningen — eller <button type="button" class="filter-info-link" aria-expanded="false" aria-controls="theme-info">læs hvad de enkelte temaer dækker →</button>
+    </p>
 
     <dl class="theme-info-panel" id="theme-info">
       <div><dt><span class="filter-icon familie"></span>Familierejser</dt>
@@ -1855,7 +1859,7 @@ a {
       const activeFilters = new Set();
       const pills = document.querySelectorAll('.filter-pill');
       const cards = document.querySelectorAll('.grid > .card');
-      const infoBtn = document.querySelector('.filter-info');
+      const infoBtn = document.querySelector('.filter-info-link');
       const infoPanel = document.getElementById('theme-info');
 
       const filtersContainer = document.querySelector('.theme-filters');
