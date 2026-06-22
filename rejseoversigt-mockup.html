@@ -1259,6 +1259,9 @@ a {
     .card-country:has(.theme-icon.maler)     .pill-country { background: #892315; }
     .card-country:has(.theme-icon.trekking)  .pill-country { background: #83663D; }
 
+    /* Stack the Dansk rejseleder badge under the Marokko pill */
+    .card-country { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+
     /* --- Theme filter row --- */
     .theme-filters {
       display: flex;
@@ -1314,6 +1317,20 @@ a {
     .filter-pill[data-theme="bjerg"]     { background: #A59184; }
     .filter-pill[data-theme="maler"]     { background: #892315; }
     .filter-pill[data-theme="trekking"]  { background: #83663D; }
+    .filter-pill[data-theme="leader"]    { background: #4a4543; }
+
+    /* Inline-SVG icon (used for the "Dansk rejseleder" pill since it isn't in the sprite) */
+    .filter-icon-leader {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background-color: rgba(255,255,255,0.16);
+      border-radius: 50%;
+    }
+    .filter-icon-leader svg { width: 17px; height: 17px; fill: #fff; }
 
     /* Helper text + link to open the theme info panel */
     .filter-help {
@@ -1358,6 +1375,8 @@ a {
       margin-bottom: 2px;
     }
     .theme-info-panel dt .filter-icon { width: 22px; height: 22px; background-size: 242px 22px; }
+    .theme-info-panel dt .filter-icon-leader { width: 22px; height: 22px; background-color: #4a4543; }
+    .theme-info-panel dt .filter-icon-leader svg { width: 13px; height: 13px; }
     .theme-info-panel dt .filter-icon.kultur    { background-position: 0 0; }
     .theme-info-panel dt .filter-icon.safari    { background-position: -22px 0; }
     .theme-info-panel dt .filter-icon.familie   { background-position: -44px 0; }
@@ -1389,14 +1408,6 @@ a {
     </div>
 
     <div class="theme-filters" role="group" aria-label="Filtrér efter rejsetema">
-      <button class="filter-pill" data-theme="familie" type="button">
-        <span class="filter-icon familie"></span>
-        <span class="filter-label">Familierejser</span>
-      </button>
-      <button class="filter-pill" data-theme="maler" type="button">
-        <span class="filter-icon maler"></span>
-        <span class="filter-label">Malerejser og skrivekurser</span>
-      </button>
       <button class="filter-pill" data-theme="safari" type="button">
         <span class="filter-icon safari"></span>
         <span class="filter-label">Safari- og naturrejser</span>
@@ -1404,6 +1415,10 @@ a {
       <button class="filter-pill" data-theme="kultur" type="button">
         <span class="filter-icon kultur"></span>
         <span class="filter-label">Kultur- og rundrejser</span>
+      </button>
+      <button class="filter-pill" data-theme="familie" type="button">
+        <span class="filter-icon familie"></span>
+        <span class="filter-label">Familierejser</span>
       </button>
       <button class="filter-pill" data-theme="trekking" type="button">
         <span class="filter-icon trekking"></span>
@@ -1413,6 +1428,10 @@ a {
         <span class="filter-icon bjerg"></span>
         <span class="filter-label">Bjergbestigning</span>
       </button>
+      <button class="filter-pill" data-theme="leader" type="button">
+        <span class="filter-icon-leader"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>
+        <span class="filter-label">Dansk rejseleder</span>
+      </button>
     </div>
 
     <p class="filter-help">
@@ -1420,18 +1439,18 @@ a {
     </p>
 
     <dl class="theme-info-panel" id="theme-info">
-      <div><dt><span class="filter-icon familie"></span>Familierejser</dt>
-      <dd>Rolige rejser tilrettelagt for familier med børn — moderate aktiviteter, fleksible dage og oplevelser for alle aldre.</dd></div>
-      <div><dt><span class="filter-icon maler"></span>Malerejser og skrivekurser</dt>
-      <dd>Kreative ophold med kursus i fx maleri eller skrivning, ledet af danske undervisere i inspirerende omgivelser.</dd></div>
       <div><dt><span class="filter-icon safari"></span>Safari- og naturrejser</dt>
       <dd>Fokus på dyreliv, vild natur og naturoplevelser i nationalparker og uberørte landskaber.</dd></div>
       <div><dt><span class="filter-icon kultur"></span>Kultur- og rundrejser</dt>
       <dd>Klassisk rundrejse mellem byer, ruiner, markeder og lokale møder — ofte med privat chauffør og guide.</dd></div>
+      <div><dt><span class="filter-icon familie"></span>Familierejser</dt>
+      <dd>Rolige rejser tilrettelagt for familier med børn — moderate aktiviteter, fleksible dage og oplevelser for alle aldre.</dd></div>
       <div><dt><span class="filter-icon trekking"></span>Trekking og vandreferie</dt>
       <dd>Flerdagsvandringer i bjerge og dale, fra moderate vandreture til længere trekruter med overnatning undervejs.</dd></div>
       <div><dt><span class="filter-icon bjerg"></span>Bjergbestigning</dt>
       <dd>Decideret bestigning af bjergtoppe — ofte med dansk ekspeditionsleder og forberedende træningsdage.</dd></div>
+      <div><dt><span class="filter-icon-leader"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>Dansk rejseleder</dt>
+      <dd>Rejser hvor en dansk rejseleder følger jer hele vejen — ofte på grupperejser, bestigninger og specielle kurser.</dd></div>
     </dl>
 
     <div class="grid">
@@ -1481,8 +1500,6 @@ a {
             <span class="pill-text">Marokko</span>
           </div>
           <span class="theme-icon trekking" title="Trekking og vandreture"></span>
-        </div>
-        <div class="card-badges">
           <div class="pill pill-detail">
             <span class="pill-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>
             <span class="pill-text">Dansk rejseleder</span>
@@ -1657,8 +1674,6 @@ a {
             <span class="pill-text">Marokko</span>
           </div>
           <span class="theme-icon bjerg" title="Bjergbestigning"></span>
-        </div>
-        <div class="card-badges">
           <div class="pill pill-detail">
             <span class="pill-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>
             <span class="pill-text">Dansk rejseleder</span>
@@ -1799,8 +1814,6 @@ a {
             <span class="pill-text">Marokko</span>
           </div>
           <span class="theme-icon maler" title="Malerejser og skrivekurser"></span>
-        </div>
-        <div class="card-badges">
           <div class="pill pill-detail">
             <span class="pill-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>
             <span class="pill-text">Dansk rejseleder</span>
@@ -1883,9 +1896,17 @@ a {
         cards.forEach(card => {
           if (card.classList.contains('card-cta')) { card.style.display = ''; return; }
           if (activeFilters.size === 0) { card.style.display = ''; return; }
+
+          // Collect this card's tags: theme + "leader" if it has the Dansk rejseleder badge
+          const tags = [];
           const icon = card.querySelector('.theme-icon');
           const theme = icon && Array.from(icon.classList).find(c => c !== 'theme-icon');
-          card.style.display = (theme && activeFilters.has(theme)) ? '' : 'none';
+          if (theme) tags.push(theme);
+          const hasLeader = Array.from(card.querySelectorAll('.pill-text'))
+            .some(s => s.textContent.trim() === 'Dansk rejseleder');
+          if (hasLeader) tags.push('leader');
+
+          card.style.display = tags.some(t => activeFilters.has(t)) ? '' : 'none';
         });
       }
 
