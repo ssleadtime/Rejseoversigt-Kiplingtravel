@@ -1,28 +1,26 @@
-# Kipling Travel — design-mockups
+# Kipling Travel — Relaterede rejser mockup
 
-Design-mockups til refresh af rejseoversigt og relaterede-rejser-sektionen på [kiplingtravel.dk](https://www.kiplingtravel.dk).
+Design-mockup til refresh af "Relaterede rejser"-sektionen på [kiplingtravel.dk](https://www.kiplingtravel.dk).
 
 ## Live preview
 
 - **Landing:** https://ssleadtime.github.io/Rejseoversigt-Kiplingtravel/
-- **Rejseoversigt (Marokko):** https://ssleadtime.github.io/Rejseoversigt-Kiplingtravel/rejseoversigt-mockup.html
-- **Relaterede rejser:** https://ssleadtime.github.io/Rejseoversigt-Kiplingtravel/relaterede-rejser-mockup.html
+- **Mockup:** https://ssleadtime.github.io/Rejseoversigt-Kiplingtravel/relaterede-rejser-mockup.html
 
 ## Filer
 
 | Fil | Formål |
 |---|---|
-| `index.html` | Landing-side med links til begge mockups + designtokens |
-| `rejseoversigt-mockup.html` | Landeoversigt med 11 rejsekort + filter-piller + info-panel |
-| `relaterede-rejser-mockup.html` | Sektion med 3 kort til bunden af en rejseside |
-| `Billeder/` | Alle billeder + `rejsetyper.svg` (tema-ikon sprite) |
+| `index.html` | Landing-side med link til mockup + designtokens |
+| `relaterede-rejser-mockup.html` | Selve sektionsmockup'en — 3 kort + toolbar |
+| `Billeder/` | 6 billeder (rejser + rejseledere) + `rejsetyper.svg` (tema-ikon sprite) |
 
 ## Sådan bruger du filerne
 
-Hver HTML-fil er **selvstændig** — al CSS er inline i toppen, og der er ingen build-step. Bare åbn dem i en browser:
+HTML-filen er **selvstændig** — al CSS er inline i toppen, og der er ingen build-step. Bare åbn den i en browser:
 
 ```bash
-open rejseoversigt-mockup.html
+open relaterede-rejser-mockup.html
 ```
 
 …eller serve hele mappen:
@@ -46,7 +44,7 @@ python3 -m http.server 8080
 
 | Rolle | Hex |
 |---|---|
-| Accent (CTA, pil) | `#FF9900` |
+| Accent (primær-CTA, pil) | `#FF9900` |
 | Tekst | `#2c2c2c` |
 | Sekundær tekst | `#6c6258` |
 | Baggrund (creme) | `#f5f0e6` |
@@ -56,18 +54,42 @@ python3 -m http.server 8080
 | Familierejser | `#6BC9DD` |
 | Bjergbestigning | `#A59184` |
 | Trekking og vandreferie | `#83663D` |
-| Dansk rejseleder-pill (baggrund) | `rgba(74,69,67,0.9)` eller transparent hvid |
+| PDF-knap (grå) | `#D0D0D0` |
 
 ### Border-radius
 
 - Kort og knapper: `8px`
-- Piller (badges, filter, status): `50px`
+- Piller (badges, status, meta): `50px`
 - Cirkulære elementer (avatar, tema-ikon i pill): `50%`
 
 ### Skygger
 
 - Kort default: `0 1px 3px rgba(0,0,0,0.06)`
-- Kort hover: `0 8-10px 20-28px rgba(0,0,0,0.12-0.14)` + `translateY(-2 til -3px)`
+- Kort hover: `0 8px 20px rgba(0,0,0,0.12)` + `translateY(-2px)`
+
+## Sektionens struktur
+
+```
+┌────────────────────────────────────────────────────────┐
+│ Relaterede rejser                    [Hent som PDF]    │  ← toolbar
+│ Andre kultur- og oplevelsesrejser...                   │
+├────────────────────────────────────────────────────────┤
+│ [Kort 1]   [Kort 2]   [Kort 3]                         │  ← 3-kolonne grid
+├────────────────────────────────────────────────────────┤
+│                [Se alle rejser →]                      │  ← primær CTA
+└────────────────────────────────────────────────────────┘
+```
+
+### Kort-struktur (fra top til bund)
+
+1. **Billede** (4:3 aspect-ratio) med tre overlejrede elementer:
+   - **Land-pill** (top-venstre): tema-farvet med tema-ikon fra sprite
+   - **Dansk rejseleder-pill** (under land-pillen): transparent hvid, blur bagved
+   - **Status-pill** (top-højre): hvid med farvet prik ("Ledige pladser" grøn, "Få pladser tilbage" orange)
+2. **Titel** — stor, fed
+3. **Meta-piller** — dato, varighed, pris (samme grå style)
+4. **Rejseleder** — lille avatar + "Rejseleder: [Navn]" (adskilt fra resten med tynd creme-linje)
+5. **CTA** — "Se rejsen ›" (kun pilen orange)
 
 ## Ikoner
 
@@ -79,17 +101,15 @@ Tema-ikonerne (kultur/safari/familie/bjerg/trekking) er ét SVG-sprite:
 
 Øvrige ikoner (kalender, ur, prismærke, "Dansk rejseleder"-personer, download) er inline SVG i HTML.
 
-## Filter-logik (kun rejseoversigt-mockup)
+## Responsivt
 
-- Klik på en filter-pill toggle'er den mellem aktiv/inaktiv (multi-select)
-- Når mindst én pill er aktiv, tones de øvrige ned til `opacity: 0.4`
-- Kortene filtreres på:
-  - `.theme-icon.[kultur|safari|familie|bjerg|trekking]` inde i kortet
-  - En separat "leader"-tag når kortet indeholder en `.pill-detail` med teksten "Dansk rejseleder"
-- CTA-kortet ("Skræddersy din rejse") vises altid
-- Info-panelet toggles ved klik på "læs hvad de enkelte temaer dækker →"-linket
+- **Desktop (≥ 900px):** 3 kort i én række
+- **Tablet (620-899px):** 2 kort i række (3. wrapper til næste)
+- **Mobil (< 620px):** 1 kort per række
 
-JavaScript ligger i bunden af HTML-filen som en IIFE — ingen eksterne dependencies.
+## Placeholder-data
+
+Det tredje kort ("Ladakh — det lille Tibet i Indien" med Jakob Rømer Barfod) er et **placeholder-eksempel**. Byt ud med den faktiske 3. relaterede rejse når data er klar.
 
 ## Ansvarlig
 
