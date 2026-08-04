@@ -85,24 +85,6 @@
     }
     .card:hover .card-image img { transform: scale(1.04); }
 
-    /* Placeholder-billeder (fjernes når rigtige billeder tilføjes) */
-    .placeholder-tibet     { background: linear-gradient(135deg, #6b8cae, #3a5a7a); }
-    .placeholder-nepal     { background: linear-gradient(135deg, #d4a373, #7a5a3d); }
-    .placeholder-indien    { background: linear-gradient(135deg, #c96e4d, #7a3a25); }
-    .placeholder-tibet::after,
-    .placeholder-nepal::after,
-    .placeholder-indien::after {
-      content: attr(data-caption);
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.55);
-      font-size: 12px;
-      font-style: italic;
-    }
-
     /* Country + theme icon (top-left) */
     .card-country {
       position: absolute;
@@ -294,7 +276,8 @@
 
       <!-- Card 1: Tibet -->
       <a class="card" href="#">
-        <div class="card-image placeholder-tibet" data-caption="Billede: Potala-paladset i Lhasa">
+        <div class="card-image">
+          <img src="Billeder/Verdegs-tag-i-Tibet-2-c-1416838165.webp" alt="Verdens tag i Tibet">
           <div class="card-country">
             <div class="pill pill-country theme-kultur">
               <span class="pill-icon kultur"></span>
@@ -327,7 +310,8 @@
 
       <!-- Card 2: Nepal -->
       <a class="card" href="#">
-        <div class="card-image placeholder-nepal" data-caption="Billede: Bengalsk tiger i Chitwan">
+        <div class="card-image">
+          <img src="Billeder/Tigerunger-Ranthambhore-nationalpark-Kipling-2-c-1770724135.webp" alt="Tigerunger i Ranthambhore nationalpark">
           <div class="card-country">
             <div class="pill pill-country theme-safari">
               <span class="pill-icon safari"></span>
@@ -360,7 +344,8 @@
 
       <!-- Card 3: Placeholder (3. afgang - fyld ind når du kender den) -->
       <a class="card" href="#">
-        <div class="card-image placeholder-indien" data-caption="Billede: Ladakh — placeholder">
+        <div class="card-image">
+          <img src="Billeder/Tibetaner-paa-hoejsletten-2-c-1416838165.webp" alt="Tibetaner på højsletten">
           <div class="card-country">
             <div class="pill pill-country theme-kultur">
               <span class="pill-icon kultur"></span>
