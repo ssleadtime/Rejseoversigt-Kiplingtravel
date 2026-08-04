@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relaterede rejser — mockup</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f0e6;
+      color: #2c2c2c;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Section header */
+    .related-header { margin-bottom: 28px; }
+    .related-header h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-weight: 400;
+      font-size: 34px;
+      margin: 0 0 6px;
+      color: #2c2c2c;
+    }
+    .related-header p {
+      margin: 0;
+      color: #6c6258;
+      font-size: 16px;
+    }
+
+    /* Grid */
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 900px) {
+      .related-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 620px) {
+      .related-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Card */
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+    }
+
+    /* Card image */
+    .card-image {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: linear-gradient(135deg, #A59184, #83663D);
+    }
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .card:hover .card-image img { transform: scale(1.04); }
+
+    /* Placeholder-billeder (fjernes når rigtige billeder tilføjes) */
+    .placeholder-tibet     { background: linear-gradient(135deg, #6b8cae, #3a5a7a); }
+    .placeholder-nepal     { background: linear-gradient(135deg, #d4a373, #7a5a3d); }
+    .placeholder-indien    { background: linear-gradient(135deg, #c96e4d, #7a3a25); }
+    .placeholder-tibet::after,
+    .placeholder-nepal::after,
+    .placeholder-indien::after {
+      content: attr(data-caption);
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    /* Country + theme icon (top-left) */
+    .card-country {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px 5px 6px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      background: #f5a623;
+      letter-spacing: 0.2px;
+    }
+    .pill-icon {
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-repeat: no-repeat;
+      background-size: 198px 18px;
+      background-image: url('Billeder/rejsetyper.svg');
+      border-radius: 50%;
+    }
+    .pill-icon.kultur    { background-position: 0 0; }
+    .pill-icon.safari    { background-position: -18px 0; }
+    .pill-icon.familie   { background-position: -36px 0; }
+    .pill-icon.bjerg     { background-position: -54px 0; }
+    .pill-icon.trekking  { background-position: -108px 0; }
+
+    .pill.theme-kultur    { background: #CC6600; }
+    .pill.theme-safari    { background: #70763F; }
+    .pill.theme-familie   { background: #6BC9DD; }
+    .pill.theme-bjerg     { background: #A59184; }
+    .pill.theme-trekking  { background: #83663D; }
+
+    .pill-detail {
+      background: rgba(74,69,67,0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .pill-detail svg { width: 14px; height: 14px; fill: #fff; }
+
+    /* Card content */
+    .card-content {
+      padding: 18px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    /* Guide */
+    .guide {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee5d4;
+    }
+    .guide-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #d6cec3;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c6258;
+      font-weight: 700;
+      font-size: 13px;
+      overflow: hidden;
+    }
+    .guide-text { line-height: 1.3; }
+    .guide-role { font-size: 11px; color: #6c6258; text-transform: uppercase; letter-spacing: 0.4px; }
+    .guide-name { font-size: 13px; font-weight: 600; color: #2c2c2c; }
+
+    /* Title */
+    .card-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.15;
+      color: #2c2c2c;
+      margin: 0;
+    }
+
+    /* Meta */
+    .card-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding-top: 4px;
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 2px; }
+    .meta-label { font-size: 10.5px; color: #8a8175; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
+    .meta-value { font-size: 14px; color: #2c2c2c; font-weight: 700; }
+
+    /* Status */
+    .card-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .card-status.available {
+      background: #e8f0e2;
+      color: #4a6b3c;
+    }
+    .card-status.available::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #6a9c50;
+    }
+    .card-status.few-left {
+      background: #fbeadb;
+      color: #a05a2a;
+    }
+    .card-status.few-left::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #d68348;
+    }
+
+    /* CTA */
+    .card-link {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #2c2c2c;
+      font-weight: 700;
+      font-size: 14px;
+      padding-top: 8px;
+    }
+    .card-link .arrow { transition: transform 0.2s ease; }
+    .card:hover .card-link .arrow { transform: translateX(4px); }
+
+    /* Footer link */
+    .related-footer {
+      margin-top: 12px;
+      text-align: center;
+    }
+    .related-footer a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #2c2c2c;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      padding: 12px 26px;
+      border: 1.5px solid #2c2c2c;
+      border-radius: 50px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .related-footer a:hover {
+      background: #2c2c2c;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="related-header">
+      <h2>Relaterede rejser</h2>
+      <p>Andre kultur- og oplevelsesrejser i Asien med dansk rejseleder</p>
+    </div>
+
+    <div class="related-grid">
+
+      <!-- Card 1: Tibet -->
+      <a class="card" href="#">
+        <div class="card-image placeholder-tibet" data-caption="Billede: Potala-paladset i Lhasa">
+          <div class="card-country">
+            <div class="pill pill-country theme-kultur">
+              <span class="pill-icon kultur"></span>
+              Tibet og Kina
+            </div>
+            <div class="pill pill-detail">
+              <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              Dansk rejseleder
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="guide">
+            <div class="guide-avatar">UJ</div>
+            <div class="guide-text">
+              <div class="guide-role">Rejseleder</div>
+              <div class="guide-name">Ulrik Høj Johnsen</div>
+            </div>
+          </div>
+          <h3 class="card-title">Den store Transtibetanske rejse</h3>
+          <div class="card-meta">
+            <div class="meta-item"><span class="meta-label">Afrejse</span><span class="meta-value">10. sep 2027</span></div>
+            <div class="meta-item"><span class="meta-label">Varighed</span><span class="meta-value">21 dage</span></div>
+            <div class="meta-item"><span class="meta-label">Pris</span><span class="meta-value">39.998,-</span></div>
+          </div>
+          <span class="card-status available">Ledige pladser</span>
+          <span class="card-link">Se rejsen <span class="arrow">›</span></span>
+        </div>
+      </a>
+
+      <!-- Card 2: Nepal -->
+      <a class="card" href="#">
+        <div class="card-image placeholder-nepal" data-caption="Billede: Bengalsk tiger i Chitwan">
+          <div class="card-country">
+            <div class="pill pill-country theme-safari">
+              <span class="pill-icon safari"></span>
+              Nepal
+            </div>
+            <div class="pill pill-detail">
+              <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              Dansk rejseleder
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="guide">
+            <div class="guide-avatar">HE</div>
+            <div class="guide-text">
+              <div class="guide-role">Rejseleder</div>
+              <div class="guide-name">Henrik Egede-Lassen</div>
+            </div>
+          </div>
+          <h3 class="card-title">Nepal safari med dansk rejseleder</h3>
+          <div class="card-meta">
+            <div class="meta-item"><span class="meta-label">Afrejse</span><span class="meta-value">9. nov 2027</span></div>
+            <div class="meta-item"><span class="meta-label">Varighed</span><span class="meta-value">11 dage</span></div>
+            <div class="meta-item"><span class="meta-label">Pris</span><span class="meta-value">27.998,-</span></div>
+          </div>
+          <span class="card-status available">Ledige pladser</span>
+          <span class="card-link">Se rejsen <span class="arrow">›</span></span>
+        </div>
+      </a>
+
+      <!-- Card 3: Placeholder (3. afgang - fyld ind når du kender den) -->
+      <a class="card" href="#">
+        <div class="card-image placeholder-indien" data-caption="Billede: Ladakh — placeholder">
+          <div class="card-country">
+            <div class="pill pill-country theme-kultur">
+              <span class="pill-icon kultur"></span>
+              Indien
+            </div>
+            <div class="pill pill-detail">
+              <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              Dansk rejseleder
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="guide">
+            <div class="guide-avatar">JB</div>
+            <div class="guide-text">
+              <div class="guide-role">Rejseleder</div>
+              <div class="guide-name">Jakob Rømer Barfod</div>
+            </div>
+          </div>
+          <h3 class="card-title">Ladakh — det lille Tibet i Indien</h3>
+          <div class="card-meta">
+            <div class="meta-item"><span class="meta-label">Afrejse</span><span class="meta-value">20. jul 2027</span></div>
+            <div class="meta-item"><span class="meta-label">Varighed</span><span class="meta-value">15 dage</span></div>
+            <div class="meta-item"><span class="meta-label">Pris</span><span class="meta-value">32.498,-</span></div>
+          </div>
+          <span class="card-status few-left">Få pladser tilbage</span>
+          <span class="card-link">Se rejsen <span class="arrow">›</span></span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="related-footer">
+      <a href="#">Se alle rejser til Asien <span>→</span></a>
+    </div>
+  </div>
+
+</body>
+</html>
