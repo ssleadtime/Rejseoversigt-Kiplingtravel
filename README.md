@@ -16,7 +16,7 @@ Alt CSS er inline i `relaterede-rejser-mockup.html` — ingen build-step, ingen 
 
 ## Noter
 
-- **Tredje kort** (Ladakh / Jakob Rømer Barfod) er en placeholder-eksempel — byt ud med den faktiske 3. relaterede rejse
+- Layoutet skal genbruges bredt — hele indholdet (rejser, ledere, datoer, temaer) er eksempeldata. Selve mockup'en viser blot komponent-mønsteret, som fyldes dynamisk ind i `.search__results--container` med relevante rejser for den enkelte side.
 - **Sprite'en** `rejsetyper.svg` har seks 40×40 tiles (kultur, safari, familie, bjerg, maler, trekking) og bruges via `background-position`
 - **JavaScript:** ingen (statisk mockup)
 - **Responsivt:** 3 kort → 2 kort → 1 kort ved 900px og 620px
