@@ -17,6 +17,6 @@ Alt CSS er inline i `relaterede-rejser-mockup.html` — ingen build-step, ingen 
 ## Noter
 
 - Layoutet skal genbruges bredt — hele indholdet (rejser, ledere, datoer, temaer) er eksempeldata. Selve mockup'en viser blot komponent-mønsteret, som fyldes dynamisk ind i `.search__results--container` med relevante rejser for den enkelte side.
-- **Sprite'en** `rejsetyper.svg` har seks 40×40 tiles (kultur, safari, familie, bjerg, maler, trekking) og bruges via `background-position`
+- **Tema-ikonerne** i mockup'en bruger den samme sprite (`rejsetyper.svg`) og de samme klasser/farver/`background-position`-værdier som allerede findes i produktions-CSS'en (`/theme/Kiplingtravel/img/rejsetyper.svg` + klasserne `.kultur`, `.safari`, `.familie`, `.bjerg`, `.trekking`). Der skal derfor ikke bygges noget nyt til tema-ikonerne.
 - **JavaScript:** ingen (statisk mockup)
 - **Responsivt:** 3 kort → 2 kort → 1 kort ved 900px og 620px
