@@ -133,26 +133,32 @@
     .pill-country.theme-bjerg     { background: #A59184; }
     .pill-country.theme-trekking  { background: #83663D; }
 
-    /* Leader pill: transparent, larger than country pill */
+    /* Leader pill: matches rejseoversigt-mockup's pill-detail format */
     .pill-leader {
-      background: rgba(255,255,255,0.22);
+      background: rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       color: #fff;
-      padding: 8px 18px 8px 6px;
-      font-size: 14px;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      padding: 0;
+      gap: 0;
     }
     .pill-leader-icon {
       width: 28px;
       height: 28px;
+      margin: 3px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.22);
+      background: rgba(255, 255, 255, 0.18);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
-    .pill-leader-icon svg { width: 15px; height: 15px; fill: #fff; }
+    .pill-leader-icon svg { width: 13px; height: 13px; fill: #fff; }
+    .pill-leader-text {
+      padding: 0 12px 0 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
 
     /* Status pill on image (bottom-right) */
     .card-status {
@@ -195,28 +201,35 @@
       margin: 0;
     }
 
-    /* Meta pills (date, duration, price) */
+    /* Meta pills (date, duration, price) — same structure as rejseoversigt */
     .card-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
     .pill-meta {
-      background: rgba(0,0,0,0.05);
+      background: rgba(0, 0, 0, 0.05);
       color: #2c2c2c;
-      padding: 5px 12px 5px 8px;
+      padding: 0;
+      gap: 0;
     }
-    .pill-meta svg {
-      width: 13px;
-      height: 13px;
-      fill: #6c6258;
+    .pill-meta-icon {
+      width: 28px;
+      height: 28px;
+      margin: 3px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.06);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
-    .pill-meta.price {
-      background: #f5f0e0;
-      color: #4a3c1e;
+    .pill-meta-icon svg { width: 13px; height: 13px; fill: #6c6258; }
+    .pill-meta-text {
+      padding: 0 12px 0 6px;
+      font-size: 12px;
+      font-weight: 600;
     }
-    .pill-meta.price svg { fill: #6c5426; }
 
     /* Guide: subtle bottom line */
     .guide {
@@ -304,7 +317,7 @@
             </span>
             <span class="pill pill-leader">
               <span class="pill-leader-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>
-              Dansk rejseleder
+              <span class="pill-leader-text">Dansk rejseleder</span>
             </span>
           </div>
           <span class="pill card-status available">Ledige pladser</span>
@@ -313,16 +326,16 @@
           <h3 class="card-title">Den store Transtibetanske rejse</h3>
           <div class="card-meta">
             <span class="pill pill-meta">
-              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
-              10. sep 2027
+              <span class="pill-meta-icon"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg></span>
+              <span class="pill-meta-text">10. sep 2027</span>
             </span>
             <span class="pill pill-meta">
-              <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-              21 dage
+              <span class="pill-meta-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></span>
+              <span class="pill-meta-text">21 dage</span>
             </span>
-            <span class="pill pill-meta price">
-              <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
-              39.998,-
+            <span class="pill pill-meta">
+              <span class="pill-meta-icon"><svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg></span>
+              <span class="pill-meta-text">39.998,-</span>
             </span>
           </div>
           <div class="guide">
@@ -344,7 +357,7 @@
             </span>
             <span class="pill pill-leader">
               <span class="pill-leader-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>
-              Dansk rejseleder
+              <span class="pill-leader-text">Dansk rejseleder</span>
             </span>
           </div>
           <span class="pill card-status available">Ledige pladser</span>
@@ -353,16 +366,16 @@
           <h3 class="card-title">Nepal safari med dansk rejseleder</h3>
           <div class="card-meta">
             <span class="pill pill-meta">
-              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
-              9. nov 2027
+              <span class="pill-meta-icon"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg></span>
+              <span class="pill-meta-text">9. nov 2027</span>
             </span>
             <span class="pill pill-meta">
-              <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-              11 dage
+              <span class="pill-meta-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></span>
+              <span class="pill-meta-text">11 dage</span>
             </span>
-            <span class="pill pill-meta price">
-              <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
-              27.998,-
+            <span class="pill pill-meta">
+              <span class="pill-meta-icon"><svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg></span>
+              <span class="pill-meta-text">27.998,-</span>
             </span>
           </div>
           <div class="guide">
@@ -384,7 +397,7 @@
             </span>
             <span class="pill pill-leader">
               <span class="pill-leader-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>
-              Dansk rejseleder
+              <span class="pill-leader-text">Dansk rejseleder</span>
             </span>
           </div>
           <span class="pill card-status few-left">Få pladser tilbage</span>
@@ -393,16 +406,16 @@
           <h3 class="card-title">Ladakh — det lille Tibet i Indien</h3>
           <div class="card-meta">
             <span class="pill pill-meta">
-              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
-              20. jul 2027
+              <span class="pill-meta-icon"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg></span>
+              <span class="pill-meta-text">20. jul 2027</span>
             </span>
             <span class="pill pill-meta">
-              <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-              15 dage
+              <span class="pill-meta-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></span>
+              <span class="pill-meta-text">15 dage</span>
             </span>
-            <span class="pill pill-meta price">
-              <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
-              32.498,-
+            <span class="pill pill-meta">
+              <span class="pill-meta-icon"><svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg></span>
+              <span class="pill-meta-text">32.498,-</span>
             </span>
           </div>
           <div class="guide">
