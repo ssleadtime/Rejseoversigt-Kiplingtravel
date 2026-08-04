@@ -26,9 +26,8 @@
     /* Section header */
     .related-header { margin-bottom: 28px; }
     .related-header h2 {
-      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 700;
-      font-size: 34px;
+      font-size: 32px;
       margin: 0 0 6px;
       color: #2c2c2c;
     }
@@ -66,8 +65,8 @@
       position: relative;
     }
     .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
 
     /* Card image */
@@ -75,7 +74,6 @@
       position: relative;
       aspect-ratio: 4/3;
       overflow: hidden;
-      background: linear-gradient(135deg, #A59184, #83663D);
     }
     .card-image img {
       width: 100%;
@@ -85,158 +83,167 @@
     }
     .card:hover .card-image img { transform: scale(1.04); }
 
-    /* Country + theme icon (top-left) */
-    .card-country {
+    /* Overlay: country + leader (top-left) */
+    .card-badges-left {
       position: absolute;
-      top: 14px;
-      left: 14px;
+      top: 12px;
+      left: 12px;
       z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 6px;
     }
+
+    /* All pills share this base */
     .pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 12px 5px 6px;
       border-radius: 50px;
       font-size: 12px;
       font-weight: 700;
+      letter-spacing: 0.1px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* Country pill: theme-colored with icon */
+    .pill-country {
       color: #fff;
-      background: #f5a623;
-      letter-spacing: 0.2px;
+      padding: 5px 14px 5px 4px;
     }
-    .pill-icon {
-      width: 18px;
-      height: 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background-repeat: no-repeat;
-      background-size: 198px 18px;
+    .pill-country .pill-icon {
+      width: 22px;
+      height: 22px;
       background-image: url('Billeder/rejsetyper.svg');
+      background-size: 242px 22px;
+      background-repeat: no-repeat;
       border-radius: 50%;
+      flex-shrink: 0;
     }
-    .pill-icon.kultur    { background-position: 0 0; }
-    .pill-icon.safari    { background-position: -18px 0; }
-    .pill-icon.familie   { background-position: -36px 0; }
-    .pill-icon.bjerg     { background-position: -54px 0; }
-    .pill-icon.trekking  { background-position: -108px 0; }
+    .pill-country .pill-icon.kultur    { background-position: 0 0; }
+    .pill-country .pill-icon.safari    { background-position: -22px 0; }
+    .pill-country .pill-icon.familie   { background-position: -44px 0; }
+    .pill-country .pill-icon.bjerg     { background-position: -66px 0; }
+    .pill-country .pill-icon.trekking  { background-position: -132px 0; }
+    .pill-country.theme-kultur    { background: #CC6600; }
+    .pill-country.theme-safari    { background: #70763F; }
+    .pill-country.theme-familie   { background: #6BC9DD; }
+    .pill-country.theme-bjerg     { background: #A59184; }
+    .pill-country.theme-trekking  { background: #83663D; }
 
-    .pill.theme-kultur    { background: #CC6600; }
-    .pill.theme-safari    { background: #70763F; }
-    .pill.theme-familie   { background: #6BC9DD; }
-    .pill.theme-bjerg     { background: #A59184; }
-    .pill.theme-trekking  { background: #83663D; }
-
-    .pill-detail {
-      background: rgba(74,69,67,0.85);
+    /* Leader pill: dark, with people icon */
+    .pill-leader {
+      background: rgba(74,69,67,0.9);
+      color: #fff;
+      padding: 5px 12px 5px 6px;
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
     }
-    .pill-detail svg { width: 14px; height: 14px; fill: #fff; }
+    .pill-leader svg { width: 14px; height: 14px; fill: #fff; flex-shrink: 0; }
+
+    /* Status pill on image (bottom-right) */
+    .card-status {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      z-index: 2;
+      padding: 6px 12px 6px 10px;
+      background: rgba(255,255,255,0.96);
+      color: #2c2c2c;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .card-status::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .card-status.available::before { background: #6a9c50; }
+    .card-status.few-left::before  { background: #d68348; }
 
     /* Card content */
     .card-content {
       padding: 18px 20px 20px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       flex: 1;
     }
 
-    /* Guide */
-    .guide {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #eee5d4;
-    }
-    .guide-avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #d6cec3;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #6c6258;
-      font-weight: 700;
-      font-size: 13px;
-      overflow: hidden;
-    }
-    .guide-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .guide-text { line-height: 1.3; }
-    .guide-role { font-size: 11px; color: #6c6258; text-transform: uppercase; letter-spacing: 0.4px; }
-    .guide-name { font-size: 13px; font-weight: 600; color: #2c2c2c; }
-
     /* Title */
     .card-title {
-      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 700;
-      font-size: 22px;
-      line-height: 1.15;
+      font-size: 20px;
+      line-height: 1.25;
       color: #2c2c2c;
       margin: 0;
     }
 
-    /* Meta */
+    /* Meta pills (date, duration, price) */
     .card-meta {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .pill-meta {
+      background: rgba(0,0,0,0.05);
+      color: #2c2c2c;
+      padding: 5px 12px 5px 8px;
+    }
+    .pill-meta svg {
+      width: 13px;
+      height: 13px;
+      fill: #6c6258;
+      flex-shrink: 0;
+    }
+    .pill-meta.price {
+      background: #f5f0e0;
+      color: #4a3c1e;
+    }
+    .pill-meta.price svg { fill: #6c5426; }
+
+    /* Guide: subtle bottom line */
+    .guide {
+      display: flex;
+      align-items: center;
       gap: 8px;
-      padding-top: 4px;
-    }
-    .meta-item { display: flex; flex-direction: column; gap: 2px; }
-    .meta-label { font-size: 10.5px; color: #8a8175; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
-    .meta-value { font-size: 14px; color: #2c2c2c; font-weight: 700; }
-
-    /* Status */
-    .card-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      align-self: flex-start;
-      padding: 5px 12px;
-      border-radius: 50px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .card-status.available {
-      background: #e8f0e2;
-      color: #4a6b3c;
-    }
-    .card-status.available::before {
-      content: '';
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #6a9c50;
-    }
-    .card-status.few-left {
-      background: #fbeadb;
-      color: #a05a2a;
-    }
-    .card-status.few-left::before {
-      content: '';
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #d68348;
-    }
-
-    /* CTA */
-    .card-link {
+      font-size: 13px;
+      color: #6c6258;
       margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid #f0e9d8;
+    }
+    .guide-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #d6cec3;
+      overflow: hidden;
+      flex-shrink: 0;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 11px;
+      color: #6c6258;
+    }
+    .guide-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .guide-name { color: #2c2c2c; font-weight: 600; }
+    .guide-name::before { content: 'Rejseleder: '; color: #8a8175; font-weight: 400; }
+
+    /* CTA link */
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       color: #2c2c2c;
       font-weight: 700;
       font-size: 14px;
-      padding-top: 8px;
     }
     .card-link .arrow { transition: transform 0.2s ease; }
     .card:hover .card-link .arrow { transform: translateX(4px); }
@@ -279,32 +286,38 @@
       <a class="card" href="#">
         <div class="card-image">
           <img src="Billeder/Verdegs-tag-i-Tibet-2-c-1416838165.webp" alt="Verdens tag i Tibet">
-          <div class="card-country">
-            <div class="pill pill-country theme-kultur">
+          <div class="card-badges-left">
+            <span class="pill pill-country theme-kultur">
               <span class="pill-icon kultur"></span>
               Tibet og Kina
-            </div>
-            <div class="pill pill-detail">
+            </span>
+            <span class="pill pill-leader">
               <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
               Dansk rejseleder
-            </div>
+            </span>
           </div>
+          <span class="pill card-status available">Ledige pladser</span>
         </div>
         <div class="card-content">
-          <div class="guide">
-            <div class="guide-avatar"><img src="Billeder/Ulrik-Hoej-Johnsen.jpeg" alt="Ulrik Høj Johnsen"></div>
-            <div class="guide-text">
-              <div class="guide-role">Rejseleder</div>
-              <div class="guide-name">Ulrik Høj Johnsen</div>
-            </div>
-          </div>
           <h3 class="card-title">Den store Transtibetanske rejse</h3>
           <div class="card-meta">
-            <div class="meta-item"><span class="meta-label">Afrejse</span><span class="meta-value">10. sep 2027</span></div>
-            <div class="meta-item"><span class="meta-label">Varighed</span><span class="meta-value">21 dage</span></div>
-            <div class="meta-item"><span class="meta-label">Pris</span><span class="meta-value">39.998,-</span></div>
+            <span class="pill pill-meta">
+              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+              10. sep 2027
+            </span>
+            <span class="pill pill-meta">
+              <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+              21 dage
+            </span>
+            <span class="pill pill-meta price">
+              <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+              39.998,-
+            </span>
           </div>
-          <span class="card-status available">Ledige pladser</span>
+          <div class="guide">
+            <div class="guide-avatar"><img src="Billeder/Ulrik-Hoej-Johnsen.jpeg" alt="Ulrik Høj Johnsen"></div>
+            <span class="guide-name">Ulrik Høj Johnsen</span>
+          </div>
           <span class="card-link">Se rejsen <span class="arrow">›</span></span>
         </div>
       </a>
@@ -313,66 +326,78 @@
       <a class="card" href="#">
         <div class="card-image">
           <img src="Billeder/Tigerunger-Ranthambhore-nationalpark-Kipling-2-c-1770724135.webp" alt="Tigerunger i Ranthambhore nationalpark">
-          <div class="card-country">
-            <div class="pill pill-country theme-safari">
+          <div class="card-badges-left">
+            <span class="pill pill-country theme-safari">
               <span class="pill-icon safari"></span>
               Nepal
-            </div>
-            <div class="pill pill-detail">
+            </span>
+            <span class="pill pill-leader">
               <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
               Dansk rejseleder
-            </div>
+            </span>
           </div>
+          <span class="pill card-status available">Ledige pladser</span>
         </div>
         <div class="card-content">
-          <div class="guide">
-            <div class="guide-avatar"><img src="Billeder/Henrik-Egede-Lassen-Rejseleder-KiplingTravel.jpg" alt="Henrik Egede-Lassen"></div>
-            <div class="guide-text">
-              <div class="guide-role">Rejseleder</div>
-              <div class="guide-name">Henrik Egede-Lassen</div>
-            </div>
-          </div>
           <h3 class="card-title">Nepal safari med dansk rejseleder</h3>
           <div class="card-meta">
-            <div class="meta-item"><span class="meta-label">Afrejse</span><span class="meta-value">9. nov 2027</span></div>
-            <div class="meta-item"><span class="meta-label">Varighed</span><span class="meta-value">11 dage</span></div>
-            <div class="meta-item"><span class="meta-label">Pris</span><span class="meta-value">27.998,-</span></div>
+            <span class="pill pill-meta">
+              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+              9. nov 2027
+            </span>
+            <span class="pill pill-meta">
+              <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+              11 dage
+            </span>
+            <span class="pill pill-meta price">
+              <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+              27.998,-
+            </span>
           </div>
-          <span class="card-status available">Ledige pladser</span>
+          <div class="guide">
+            <div class="guide-avatar"><img src="Billeder/Henrik-Egede-Lassen-Rejseleder-KiplingTravel.jpg" alt="Henrik Egede-Lassen"></div>
+            <span class="guide-name">Henrik Egede-Lassen</span>
+          </div>
           <span class="card-link">Se rejsen <span class="arrow">›</span></span>
         </div>
       </a>
 
-      <!-- Card 3: Placeholder (3. afgang - fyld ind når du kender den) -->
+      <!-- Card 3: Placeholder (3. afgang) -->
       <a class="card" href="#">
         <div class="card-image">
           <img src="Billeder/Tibetaner-paa-hoejsletten-2-c-1416838165.webp" alt="Tibetaner på højsletten">
-          <div class="card-country">
-            <div class="pill pill-country theme-kultur">
+          <div class="card-badges-left">
+            <span class="pill pill-country theme-kultur">
               <span class="pill-icon kultur"></span>
               Indien
-            </div>
-            <div class="pill pill-detail">
+            </span>
+            <span class="pill pill-leader">
               <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
               Dansk rejseleder
-            </div>
+            </span>
           </div>
+          <span class="pill card-status few-left">Få pladser tilbage</span>
         </div>
         <div class="card-content">
-          <div class="guide">
-            <div class="guide-avatar">JB</div>
-            <div class="guide-text">
-              <div class="guide-role">Rejseleder</div>
-              <div class="guide-name">Jakob Rømer Barfod</div>
-            </div>
-          </div>
           <h3 class="card-title">Ladakh — det lille Tibet i Indien</h3>
           <div class="card-meta">
-            <div class="meta-item"><span class="meta-label">Afrejse</span><span class="meta-value">20. jul 2027</span></div>
-            <div class="meta-item"><span class="meta-label">Varighed</span><span class="meta-value">15 dage</span></div>
-            <div class="meta-item"><span class="meta-label">Pris</span><span class="meta-value">32.498,-</span></div>
+            <span class="pill pill-meta">
+              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+              20. jul 2027
+            </span>
+            <span class="pill pill-meta">
+              <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+              15 dage
+            </span>
+            <span class="pill pill-meta price">
+              <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+              32.498,-
+            </span>
           </div>
-          <span class="card-status few-left">Få pladser tilbage</span>
+          <div class="guide">
+            <div class="guide-avatar">JB</div>
+            <span class="guide-name">Jakob Rømer Barfod</span>
+          </div>
           <span class="card-link">Se rejsen <span class="arrow">›</span></span>
         </div>
       </a>
