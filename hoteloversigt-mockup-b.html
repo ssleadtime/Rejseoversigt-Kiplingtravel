@@ -216,40 +216,46 @@
       background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.35) 55%, transparent 85%);
     }
 
-    /* Kategori-badge: i hvile kun ikon-cirkel, ved hover udvides til pill med tekst */
+    /* Kategori-badge — figma-specs: begge lag rgba(217,217,217,0.2) + backdrop-blur(20px)
+       Ikon-cirklen overlapper pillens venstre ende, så ikon-området fremstår subtilt mørkere */
     .card-cat {
       display: inline-flex;
       align-items: center;
-      background: rgba(60, 55, 50, 0.55);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-radius: 50px;
-      padding: 3px;
+      background: rgba(217, 217, 217, 0.2);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 100px;
+      padding: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       transition: padding-right 0.3s ease;
     }
-    .card:hover .card-cat { padding-right: 14px; }
+    .card:hover .card-cat { padding-right: 18px; }
+
     .card-cat-icon {
-      width: 32px; height: 32px;
+      width: 40px; height: 40px;
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.28);
+      background: rgba(217, 217, 217, 0.2);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
     .card-cat-icon .cat-sprite {
-      width: 20px; height: 20px;
+      width: 24px; height: 24px;
       background-image: url('Billeder/kipling-kategorier.svg');
-      background-size: 60.6px 20px;
+      background-size: 72.8px 24px;
       background-repeat: no-repeat;
     }
     .card-cat.classic .card-cat-icon .cat-sprite { background-position: 0 0; }
-    .card-cat.plus    .card-cat-icon .cat-sprite { background-position: -20.4px 0; }
-    .card-cat.premium .card-cat-icon .cat-sprite { background-position: -40.8px 0; }
+    .card-cat.plus    .card-cat-icon .cat-sprite { background-position: -24.5px 0; }
+    .card-cat.premium .card-cat-icon .cat-sprite { background-position: -49px 0; }
+
     .card-cat-text {
       color: #fff;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 15px;
       padding-left: 0;
       max-width: 0;
       overflow: hidden;
@@ -258,13 +264,10 @@
       transition: max-width 0.3s ease, opacity 0.2s ease 0.05s, padding-left 0.3s ease;
     }
     .card:hover .card-cat-text {
-      max-width: 200px;
+      max-width: 220px;
       opacity: 1;
-      padding-left: 10px;
+      padding-left: 12px;
     }
-    /* I hvile: ingen padding-right på pillen, så den bliver en perfekt cirkel */
-    .card-cat { padding-right: 3px; }
-    .card:hover .card-cat { padding-right: 14px; }
 
     /* Hotelnavn — altid synligt oven på billedet */
     .card-title {
