@@ -102,22 +102,28 @@
   <div class="wrap">
     <header>
       <p class="kicker">Kipling Travel — design refresh</p>
-      <h1>Relaterede rejser</h1>
-      <p>Selvstændig mockup — al CSS inline, ingen build-step. Åbn, kopiér, eller download hele pakken via <code>Code → Download ZIP</code> på repo'et.</p>
+      <h1>Design-mockups</h1>
+      <p>Selvstændige mockups — al CSS inline, ingen build-step. Åbn, kopiér, eller download hele pakken via <code>Code → Download ZIP</code> på repo'et.</p>
     </header>
 
     <a class="card" href="relaterede-rejser-mockup.html">
-      <h2>Åbn mockup</h2>
+      <h2>Relaterede rejser</h2>
       <p>3-kort sektion med land + tema-pill, transparent "Dansk rejseleder"-badge, status på billedet, rejseleder-avatar og meta-piller (dato, varighed, pris).</p>
-      <span class="cta">Se live <span class="arrow">›</span></span>
+      <span class="cta">Åbn mockup <span class="arrow">›</span></span>
+    </a>
+
+    <a class="card" href="hoteloversigt-mockup.html">
+      <h2>Hoteloversigt + hotel-popup</h2>
+      <p>4-kolonners hotel-grid med lokation + kategori-pill (Classic / Plus / Premium). Klik på et hotel åbner en popup med billedgalleri, beskrivelse og alternative hoteller — hotelsiden er ikke længere en separat URL.</p>
+      <span class="cta">Åbn mockup <span class="arrow">›</span></span>
     </a>
 
     <div class="notes">
-      <strong>Noter til implementering:</strong>
+      <strong>Fælles noter:</strong>
       <ul>
-        <li>Layoutet skal genbruges bredt — indholdet i mockup'en er eksempeldata. Selve kort-komponenten skal populeres dynamisk med relevante rejser i <code>.search__results--container</code></li>
-        <li>Tema-ikonerne bruger allerede eksisterende sprite (<code>rejsetyper.svg</code>) og klasser (<code>.kultur</code>, <code>.safari</code>, <code>.familie</code>, <code>.bjerg</code>, <code>.trekking</code>) fra produktions-CSS'en — intet nyt at bygge her</li>
-        <li>Ingen JavaScript — ren statisk mockup</li>
+        <li>Indholdet i mockups er eksempeldata — kort-komponenterne populeres dynamisk fra CMS/DB</li>
+        <li>Tema-ikoner (rejseoversigten) bruger eksisterende sprite (<code>rejsetyper.svg</code>) og klasser (<code>.kultur</code>, <code>.safari</code>, <code>.familie</code>, <code>.bjerg</code>, <code>.trekking</code>) fra produktions-CSS'en</li>
+        <li>Hotel-kategori-ikoner (Classic/Plus/Premium) bruger eksisterende <code>sprout.svg</code>, <code>plus.svg</code>, <code>star.svg</code></li>
       </ul>
     </div>
 
