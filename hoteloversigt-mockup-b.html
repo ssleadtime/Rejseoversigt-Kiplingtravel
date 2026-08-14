@@ -599,26 +599,23 @@
       gap: 12px;
       margin-bottom: 12px;
     }
+    /* Kategori-badge: brug det sammensatte sprite (farvet cirkel + hvidt ikon indbygget) */
     .cat-card-badge {
       width: 44px; height: 44px;
-      border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
-    .cat-card-badge.classic { background: #F0832C; }
-    .cat-card-badge.plus    { background: #D7CC63; }
-    .cat-card-badge.premium { background: #152C12; }
     .cat-card-badge .cat-sprite {
-      width: 26px; height: 26px;
-      background-image: url('Billeder/kipling-kategorier.svg');
-      background-size: 78.9px 26px;
+      width: 44px; height: 44px;
+      background-image: url('Billeder/kipling-kategorier-farve.svg');
+      background-size: 133.5px 44px;
       background-repeat: no-repeat;
     }
     .cat-card-badge.classic .cat-sprite { background-position: 0 0; }
-    .cat-card-badge.plus    .cat-sprite { background-position: -26.5px 0; }
-    .cat-card-badge.premium .cat-sprite { background-position: -53px 0; }
+    .cat-card-badge.plus    .cat-sprite { background-position: -44.9px 0; }
+    .cat-card-badge.premium .cat-sprite { background-position: -89.6px 0; }
     .cat-card-title {
       font-size: 17px;
       font-weight: 700;
