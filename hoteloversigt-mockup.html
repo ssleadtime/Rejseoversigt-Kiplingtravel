@@ -205,16 +205,17 @@
     .card-cat {
       display: inline-flex;
       align-items: center;
-      background: rgba(217, 217, 217, 0.2);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: transparent;
       border-radius: 100px;
       padding: 0;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      transition: padding 0.3s ease;
+      transition: background 0.3s ease, padding 0.3s ease;
     }
-    /* Ved hover: pillen faar padding rundt om ikonet, saa farvede badge sidder INDEN i pillen */
-    .card:hover .card-cat { padding: 5px 18px 5px 5px; }
+    /* Ved hover: pillen bliver solid kategori-farvet, matcher badge-farven saa de smelter sammen visuelt */
+    .card:hover .card-cat { padding: 0 18px 0 0; }
+    .card:hover .card-cat.classic { background: #F0832C; }
+    .card:hover .card-cat.plus    { background: #D7CC63; }
+    .card:hover .card-cat.premium { background: #152C12; }
 
     .card-cat-icon {
       width: 40px; height: 40px;
@@ -310,21 +311,21 @@
       font-size: 12px;
       font-weight: 600;
     }
+    /* Pill-category: solid kategori-farve + hvidt ikon direkte (som .pill-country) */
     .pill-category {
       color: #fff;
       padding: 5px 14px 5px 4px;
     }
     .pill-category .cat-sprite {
       width: 22px; height: 22px;
-      background-image: url('Billeder/kipling-kategorier.svg');
+      background-image: url('Billeder/kipling-kategorier-hvid.svg');
       background-size: 66.7px 22px;
       background-repeat: no-repeat;
-      border-radius: 50%;
       flex-shrink: 0;
     }
-    .pill-category.classic { background: #70763F; }
-    .pill-category.plus    { background: #4a4543; }
-    .pill-category.premium { background: #B8860B; }
+    .pill-category.classic { background: #F0832C; }
+    .pill-category.plus    { background: #D7CC63; }
+    .pill-category.premium { background: #152C12; }
     .pill-category.classic .cat-sprite { background-position: 0 0; }
     .pill-category.plus    .cat-sprite { background-position: -22.5px 0; }
     .pill-category.premium .cat-sprite { background-position: -45px 0; }
@@ -522,17 +523,27 @@
       margin-bottom: 8px;
     }
     .alt-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    /* Alt-card badge: rund farvet cirkel + hvidt ikon (samme sprite som hotelkortet) */
     .alt-card-cat {
       position: absolute;
       top: 8px; left: 8px;
-      padding: 3px 8px 3px 4px;
-      font-size: 10px;
-      gap: 4px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
-    .alt-card-cat .cat-sprite { width: 16px; height: 16px; background-size: 48.5px 16px; }
+    .alt-card-cat .cat-sprite {
+      width: 28px;
+      height: 28px;
+      background-image: url('Billeder/kipling-kategorier-farve.svg');
+      background-size: 85px 28px;
+      background-repeat: no-repeat;
+      display: block;
+    }
     .alt-card-cat.classic .cat-sprite { background-position: 0 0; }
-    .alt-card-cat.plus    .cat-sprite { background-position: -16.4px 0; }
-    .alt-card-cat.premium .cat-sprite { background-position: -32.8px 0; }
+    .alt-card-cat.plus    .cat-sprite { background-position: -28.6px 0; }
+    .alt-card-cat.premium .cat-sprite { background-position: -57.1px 0; }
     .alt-card-title {
       font-size: 13px;
       font-weight: 600;
@@ -625,7 +636,7 @@
     <div class="hotel-header">
       <div>
         <h2>Strandhoteller på Zanzibar</h2>
-        <p>Vi udvælger vores hoteller efter kvalitet, beliggenhed og stemning. Klik på et hotel for at se detaljer.</p>
+        <p>Under dit ophold på eksotiske Zanzibar kan du vælge mellem tre hotel-komfortklasser: <strong>Kipling Classic</strong>, <strong>Kipling Plus</strong> og <strong>Kipling Premium</strong>. Vi udvælger vores strandhoteller ud fra vores faste krav til kvalitet, beliggenhed og stemning — og kombinerer gæstfrihed, komfort og havudsigt, så du kan nyde ølivet præcis som du drømmer om det. Klik på et hotel for at se detaljer.</p>
       </div>
       <div class="version-toggle" title="Skift mellem to design-varianter">
         <span class="version-label">Variant:</span>
@@ -635,29 +646,29 @@
     </div>
 
     <section class="cat-explainer">
-      <h3>Vores hotelkategorier</h3>
-      <p>Vi klassificerer alle hoteller efter tre niveauer, så du hurtigt kan se hvad du kan forvente.</p>
+      <h3>Hotel-klassificeringer</h3>
+      <p>Vi klassificerer vores hoteller efter tre komfortklasser. Ønsker du lidt ekstra komfort og forkælelse på din rejse, kan du overveje at opgradere.</p>
       <div class="cat-explainer-grid">
         <div class="cat-card">
           <div class="cat-card-head">
             <span class="cat-card-badge classic"><span class="cat-sprite"></span></span>
             <h4 class="cat-card-title">Kipling Classic</h4>
           </div>
-          <p>Charmerende hoteller med god standard, personlig atmosfære og en fin beliggenhed. Ofte mindre og familiedrevne — vores klassikere gennem årene, hvor du får ægte oplevelse frem for luksus.</p>
+          <p>Vores gode og gennemprøvede turisthoteller. Når vi udvælger vores Classic-hoteller, lægger vi vægt på gode senge, autentiske omgivelser og de fornødne faciliteter som ordentlige badeforhold. Hotellerne bidrager uden tvivl til en skøn rejse.</p>
         </div>
         <div class="cat-card">
           <div class="cat-card-head">
             <span class="cat-card-badge plus"><span class="cat-sprite"></span></span>
             <h4 class="cat-card-title">Kipling Plus</h4>
           </div>
-          <p>Et niveau over Classic. Rummeligere værelser, flere faciliteter (pool, restaurant, bar) og bedre komfort — men stadig med Kiplings personlige tilgang. For dig der vil have lidt mere plads og bekvemmelighed.</p>
+          <p>En opgradering af Classic-hotellerne. Typisk 4-stjernede hoteller, hvor komforten har fået et nøk op, og der er klart skruet op for charmen. Perfekt hvis du vil have lidt ekstra plads, faciliteter og forkælelse — uden at gå hele vejen til Premium.</p>
         </div>
         <div class="cat-card">
           <div class="cat-card-head">
             <span class="cat-card-badge premium"><span class="cat-sprite"></span></span>
             <h4 class="cat-card-title">Kipling Premium</h4>
           </div>
-          <p>Vores fineste hoteller. Førsteklasses beliggenhed, luksuriøse værelser og enestående service. Her forkæler du dig selv — perfekte til bryllupsrejser, mærkedage eller når rejsen skal være helt særlig.</p>
+          <p>Absolut topklasse indenfor luksuriøse hoteller i fænomenale omgivelser. Her finder du (efter vores mening) det bedste landet har at byde på indenfor 5-stjernede hoteller og resorts. Til bryllupsrejser, mærkedage eller når rejsen skal være helt særlig.</p>
         </div>
       </div>
     </section>
@@ -831,7 +842,7 @@
         c.innerHTML = `
           <div class="alt-card-img">
             <img src="${alt.img}" alt="${alt.name}" loading="lazy">
-            <span class="pill pill-category alt-card-cat ${alt.cat}">
+            <span class="alt-card-cat ${alt.cat}">
               <span class="cat-sprite"></span>
             </span>
           </div>
