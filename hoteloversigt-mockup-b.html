@@ -538,20 +538,23 @@
       margin-top: 2px;
     }
 
-    /* Kategori-forklaringer (nu øverst, mellem intro og filtre) */
+    /* Kategori-forklaringer (nederst — b-variant) */
     .cat-explainer {
-      margin: 24px 0 8px;
+      max-width: 1280px;
+      margin: 60px auto 0;
+      padding: 44px 24px 20px;
+      border-top: 1px solid #eae1cf;
     }
     .cat-explainer h3 {
       font-weight: 700;
-      font-size: 20px;
+      font-size: 22px;
       margin: 0 0 6px;
       color: #2c2c2c;
     }
     .cat-explainer > p {
       color: #6c6258;
-      font-size: 14px;
-      margin: 0 0 18px;
+      font-size: 15px;
+      margin: 0 0 28px;
       max-width: 720px;
     }
     .cat-explainer-grid {
@@ -623,38 +626,10 @@
       </div>
       <div class="version-toggle" title="Skift mellem to design-varianter">
         <span class="version-label">Variant:</span>
-        <a class="version-btn active" href="hoteloversigt-mockup.html">A</a>
-        <a class="version-btn" href="hoteloversigt-mockup-b.html">B</a>
+        <a class="version-btn" href="hoteloversigt-mockup.html">A</a>
+        <a class="version-btn active" href="hoteloversigt-mockup-b.html">B</a>
       </div>
     </div>
-
-    <section class="cat-explainer">
-      <h3>Vores hotelkategorier</h3>
-      <p>Vi klassificerer alle hoteller efter tre niveauer, så du hurtigt kan se hvad du kan forvente.</p>
-      <div class="cat-explainer-grid">
-        <div class="cat-card">
-          <div class="cat-card-head">
-            <span class="cat-card-badge classic"><span class="cat-sprite"></span></span>
-            <h4 class="cat-card-title">Kipling Classic</h4>
-          </div>
-          <p>Charmerende hoteller med god standard, personlig atmosfære og en fin beliggenhed. Ofte mindre og familiedrevne — vores klassikere gennem årene, hvor du får ægte oplevelse frem for luksus.</p>
-        </div>
-        <div class="cat-card">
-          <div class="cat-card-head">
-            <span class="cat-card-badge plus"><span class="cat-sprite"></span></span>
-            <h4 class="cat-card-title">Kipling Plus</h4>
-          </div>
-          <p>Et niveau over Classic. Rummeligere værelser, flere faciliteter (pool, restaurant, bar) og bedre komfort — men stadig med Kiplings personlige tilgang. For dig der vil have lidt mere plads og bekvemmelighed.</p>
-        </div>
-        <div class="cat-card">
-          <div class="cat-card-head">
-            <span class="cat-card-badge premium"><span class="cat-sprite"></span></span>
-            <h4 class="cat-card-title">Kipling Premium</h4>
-          </div>
-          <p>Vores fineste hoteller. Førsteklasses beliggenhed, luksuriøse værelser og enestående service. Her forkæler du dig selv — perfekte til bryllupsrejser, mærkedage eller når rejsen skal være helt særlig.</p>
-        </div>
-      </div>
-    </section>
 
     <div class="category-filters">
       <span class="filter-label">Filtrer:</span>
@@ -665,6 +640,34 @@
 
     <div class="hotel-grid" id="hotelGrid"></div>
   </div>
+
+  <section class="cat-explainer">
+    <h3>Vores hotelkategorier</h3>
+    <p>Vi klassificerer alle hoteller efter tre niveauer, så du hurtigt kan se hvad du kan forvente.</p>
+    <div class="cat-explainer-grid">
+      <div class="cat-card">
+        <div class="cat-card-head">
+          <span class="cat-card-badge classic"><span class="cat-sprite"></span></span>
+          <h4 class="cat-card-title">Kipling Classic</h4>
+        </div>
+        <p>Charmerende hoteller med god standard, personlig atmosfære og en fin beliggenhed. Ofte mindre og familiedrevne — vores klassikere gennem årene, hvor du får ægte oplevelse frem for luksus.</p>
+      </div>
+      <div class="cat-card">
+        <div class="cat-card-head">
+          <span class="cat-card-badge plus"><span class="cat-sprite"></span></span>
+          <h4 class="cat-card-title">Kipling Plus</h4>
+        </div>
+        <p>Et niveau over Classic. Rummeligere værelser, flere faciliteter (pool, restaurant, bar) og bedre komfort — men stadig med Kiplings personlige tilgang. For dig der vil have lidt mere plads og bekvemmelighed.</p>
+      </div>
+      <div class="cat-card">
+        <div class="cat-card-head">
+          <span class="cat-card-badge premium"><span class="cat-sprite"></span></span>
+          <h4 class="cat-card-title">Kipling Premium</h4>
+        </div>
+        <p>Vores fineste hoteller. Førsteklasses beliggenhed, luksuriøse værelser og enestående service. Her forkæler du dig selv — perfekte til bryllupsrejser, mærkedage eller når rejsen skal være helt særlig.</p>
+      </div>
+    </div>
+  </section>
 
   <p class="mockup-note">
     Mockup — layoutet er komponenten. Hoteldata og forklaringstekster kommer fra CMS/DB.
