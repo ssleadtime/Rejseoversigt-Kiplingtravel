@@ -228,31 +228,28 @@
       border-radius: 100px;
       padding: 0;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      transition: padding-right 0.3s ease;
+      transition: padding 0.3s ease;
     }
-    .card:hover .card-cat { padding-right: 18px; }
+    /* Ved hover: pillen faar padding rundt om ikonet, saa farvede badge sidder INDEN i pillen */
+    .card:hover .card-cat { padding: 5px 18px 5px 5px; }
 
     .card-cat-icon {
       width: 40px; height: 40px;
-      border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
-    /* Farvet ikon-cirkel pr. kategori */
-    .card-cat.classic .card-cat-icon { background: #F0832C; }
-    .card-cat.plus    .card-cat-icon { background: #D7CC63; }
-    .card-cat.premium .card-cat-icon { background: #152C12; }
+    /* Farvet cirkel + hvidt ikon indbygget som ét sprite */
     .card-cat-icon .cat-sprite {
-      width: 24px; height: 24px;
-      background-image: url('Billeder/kipling-kategorier.svg');
-      background-size: 72.8px 24px;
+      width: 40px; height: 40px;
+      background-image: url('Billeder/kipling-kategorier-farve.svg');
+      background-size: 121.3px 40px;
       background-repeat: no-repeat;
     }
     .card-cat.classic .card-cat-icon .cat-sprite { background-position: 0 0; }
-    .card-cat.plus    .card-cat-icon .cat-sprite { background-position: -24.5px 0; }
-    .card-cat.premium .card-cat-icon .cat-sprite { background-position: -49px 0; }
+    .card-cat.plus    .card-cat-icon .cat-sprite { background-position: -40.8px 0; }
+    .card-cat.premium .card-cat-icon .cat-sprite { background-position: -81.5px 0; }
 
     .card-cat-text {
       color: #fff;
