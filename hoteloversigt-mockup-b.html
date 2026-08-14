@@ -8,6 +8,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -17,6 +18,23 @@
       -webkit-font-smoothing: antialiased;
     }
     body.modal-open { overflow: hidden; }
+
+    /* Læs mere-link under filter-pillerne */
+    .filter-hint {
+      margin: 4px 0 4px;
+      font-size: 13px;
+      color: #6c6258;
+    }
+    .filter-hint a {
+      color: #6c6258;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.15s ease;
+    }
+    .filter-hint a:hover { color: #FF9900; }
+
+    .cat-explainer { scroll-margin-top: 20px; }
 
     .container {
       max-width: 1280px;
@@ -637,11 +655,12 @@
       <button class="filter-pill" data-cat="plus" type="button"><span class="cat-sprite"></span>Kipling Plus</button>
       <button class="filter-pill" data-cat="premium" type="button"><span class="cat-sprite"></span>Kipling Premium</button>
     </div>
+    <p class="filter-hint"><a href="#catExplainer">Læs mere om vores kategorier nedenfor →</a></p>
 
     <div class="hotel-grid" id="hotelGrid"></div>
   </div>
 
-  <section class="cat-explainer">
+  <section class="cat-explainer" id="catExplainer">
     <h3>Vores hotelkategorier</h3>
     <p>Vi klassificerer alle hoteller efter tre niveauer, så du hurtigt kan se hvad du kan forvente.</p>
     <div class="cat-explainer-grid">
