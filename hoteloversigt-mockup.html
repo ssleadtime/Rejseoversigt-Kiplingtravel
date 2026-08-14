@@ -205,17 +205,16 @@
     .card-cat {
       display: inline-flex;
       align-items: center;
-      background: transparent;
+      background: rgba(217, 217, 217, 0.2);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-radius: 100px;
       padding: 0;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s ease, padding 0.3s ease;
+      transition: padding 0.3s ease;
     }
-    /* Ved hover: pillen bliver solid kategori-farvet, matcher badge-farven saa de smelter sammen visuelt */
+    /* Ved hover: pillen udvides kun til hoejre for tekst — badge sidder flush pa venstre kant, ingen glas-margin omkring */
     .card:hover .card-cat { padding: 0 18px 0 0; }
-    .card:hover .card-cat.classic { background: #F0832C; }
-    .card:hover .card-cat.plus    { background: #D7CC63; }
-    .card:hover .card-cat.premium { background: #152C12; }
 
     .card-cat-icon {
       width: 40px; height: 40px;
