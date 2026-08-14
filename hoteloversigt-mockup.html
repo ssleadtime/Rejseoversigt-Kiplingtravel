@@ -101,35 +101,31 @@
     @media (max-width: 820px)  { .hotel-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 520px)  { .hotel-grid { grid-template-columns: 1fr; } }
 
-    /* Card — same base as relaterede-rejser */
+    /* Card — minimalist: image + title below, no white block */
     .card {
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      text-decoration: none;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
       color: inherit;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      position: relative;
-      cursor: pointer;
-      border: none;
-      font-family: inherit;
+      gap: 14px;
       text-align: left;
-      padding: 0;
-      width: 100%;
+      font-family: inherit;
+      transition: transform 0.22s ease;
     }
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
+    .card:hover { transform: translateY(-2px); }
 
     .card-image {
       position: relative;
-      aspect-ratio: 4/3;
+      aspect-ratio: 4/5;
       overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      transition: box-shadow 0.22s ease;
     }
+    .card:hover .card-image { box-shadow: 0 10px 24px rgba(0,0,0,0.16); }
     .card-image img {
       width: 100%;
       height: 100%;
@@ -138,18 +134,45 @@
     }
     .card:hover .card-image img { transform: scale(1.04); }
 
-    /* Overlay pills top-left (stacked) */
-    .card-badges-left {
+    /* Category icon: bare cirkel med ikon, ingen tekst-label */
+    .cat-badge {
       position: absolute;
-      top: 12px;
-      left: 12px;
+      bottom: 14px;
+      left: 14px;
       z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .cat-badge.classic { background: #70763F; }
+    .cat-badge.plus    { background: #4a4543; }
+    .cat-badge.premium { background: #B8860B; }
+    .cat-badge .cat-sprite {
+      width: 24px;
+      height: 24px;
+      background-image: url('Billeder/kipling-kategorier.svg');
+      background-size: 72.8px 24px;
+      background-repeat: no-repeat;
+    }
+    .cat-badge.classic .cat-sprite { background-position: 0 0; }
+    .cat-badge.plus    .cat-sprite { background-position: -24.5px 0; }
+    .cat-badge.premium .cat-sprite { background-position: -49px 0; }
+
+    /* Card title — direkte på baggrunden, ingen kort-blok */
+    .card-title {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1.2;
+      color: #2c2c2c;
+      margin: 0;
+      padding: 0 4px;
     }
 
+    /* Pill-base (bruges kun i pop-up nu) */
     .pill {
       display: inline-flex;
       align-items: center;
@@ -157,46 +180,34 @@
       border-radius: 50px;
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.1px;
       line-height: 1;
       white-space: nowrap;
     }
-
-    /* Location pill: transparent white with backdrop-blur (samme mønster som pill-leader) */
     .pill-location {
-      background: rgba(255, 255, 255, 0.28);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #fff;
       padding: 0;
       gap: 0;
     }
     .pill-location-icon {
-      width: 28px;
-      height: 28px;
+      width: 28px; height: 28px;
       margin: 3px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.18);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
-    .pill-location-icon svg { width: 13px; height: 13px; fill: #fff; }
+    .pill-location-icon svg { width: 13px; height: 13px; }
     .pill-location-text {
       padding: 0 12px 0 6px;
       font-size: 12px;
       font-weight: 600;
     }
-
-    /* Category pill: colored bg with icon in transparent circle (samme mønster som pill-country) */
     .pill-category {
       color: #fff;
       padding: 5px 14px 5px 4px;
     }
     .pill-category .cat-sprite {
-      width: 22px;
-      height: 22px;
+      width: 22px; height: 22px;
       background-image: url('Billeder/kipling-kategorier.svg');
       background-size: 66.7px 22px;
       background-repeat: no-repeat;
@@ -209,44 +220,6 @@
     .pill-category.classic .cat-sprite { background-position: 0 0; }
     .pill-category.plus    .cat-sprite { background-position: -22.5px 0; }
     .pill-category.premium .cat-sprite { background-position: -45px 0; }
-
-    /* Card content */
-    .card-content {
-      padding: 18px 20px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex: 1;
-    }
-    .card-title {
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 1.25;
-      color: #2c2c2c;
-      margin: 0;
-    }
-    .card-subtitle {
-      font-size: 13px;
-      color: #6c6258;
-      margin: -6px 0 0;
-      line-height: 1.4;
-    }
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      color: #2c2c2c;
-      font-weight: 700;
-      font-size: 14px;
-      margin-top: auto;
-      padding-top: 4px;
-    }
-    .card-link .arrow {
-      color: #FF9900;
-      font-weight: 700;
-      transition: transform 0.2s ease;
-    }
-    .card:hover .card-link .arrow { transform: translateX(4px); }
 
     /* ═══════════════════════════════════════════════════════════════
        MODAL / POPUP
@@ -387,8 +360,6 @@
     .modal-meta .pill-location {
       background: rgba(0,0,0,0.05);
       color: #2c2c2c;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
     }
     .modal-meta .pill-location-icon { background: rgba(0,0,0,0.06); }
     .modal-meta .pill-location-icon svg { fill: #FF9900; }
@@ -466,11 +437,98 @@
       margin-top: 2px;
     }
 
+    /* Læs mere-link ved filtre */
+    .cat-info-link {
+      margin-left: 4px;
+      color: #6c6258;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px 8px;
+      font-family: inherit;
+      transition: color 0.15s ease;
+    }
+    .cat-info-link:hover { color: #FF9900; }
+
+    /* Kategori-forklaringer nederst */
+    .cat-explainer {
+      max-width: 1280px;
+      margin: 60px auto 0;
+      padding: 44px 24px 20px;
+      border-top: 1px solid #eae1cf;
+      scroll-margin-top: 20px;
+    }
+    .cat-explainer h3 {
+      font-weight: 700;
+      font-size: 22px;
+      margin: 0 0 6px;
+      color: #2c2c2c;
+    }
+    .cat-explainer > p {
+      color: #6c6258;
+      font-size: 15px;
+      margin: 0 0 28px;
+      max-width: 720px;
+    }
+    .cat-explainer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    @media (max-width: 820px) { .cat-explainer-grid { grid-template-columns: 1fr; } }
+    .cat-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px 24px 22px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .cat-card-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .cat-card-badge {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cat-card-badge.classic { background: #70763F; }
+    .cat-card-badge.plus    { background: #4a4543; }
+    .cat-card-badge.premium { background: #B8860B; }
+    .cat-card-badge .cat-sprite {
+      width: 26px; height: 26px;
+      background-image: url('Billeder/kipling-kategorier.svg');
+      background-size: 78.9px 26px;
+      background-repeat: no-repeat;
+    }
+    .cat-card-badge.classic .cat-sprite { background-position: 0 0; }
+    .cat-card-badge.plus    .cat-sprite { background-position: -26.5px 0; }
+    .cat-card-badge.premium .cat-sprite { background-position: -53px 0; }
+    .cat-card-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 0;
+    }
+    .cat-card p {
+      color: #4a4640;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
     /* Note (only in mockup) */
     .mockup-note {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 24px 40px;
+      padding: 20px 24px 40px;
       color: #8a8175;
       font-size: 13px;
       text-align: center;
@@ -491,13 +549,42 @@
       <button class="filter-pill" data-cat="classic" type="button"><span class="cat-sprite"></span>Kipling Classic</button>
       <button class="filter-pill" data-cat="plus" type="button"><span class="cat-sprite"></span>Kipling Plus</button>
       <button class="filter-pill" data-cat="premium" type="button"><span class="cat-sprite"></span>Kipling Premium</button>
+      <button class="cat-info-link" type="button" onclick="document.getElementById('catExplainer').scrollIntoView({behavior:'smooth', block:'start'})">Læs mere om kategorierne ↓</button>
     </div>
 
     <div class="hotel-grid" id="hotelGrid"></div>
   </div>
 
+  <section class="cat-explainer" id="catExplainer">
+    <h3>Vores hotelkategorier</h3>
+    <p>Vi klassificerer alle hoteller efter tre niveauer, så du hurtigt kan se hvad du kan forvente.</p>
+    <div class="cat-explainer-grid">
+      <div class="cat-card">
+        <div class="cat-card-head">
+          <span class="cat-card-badge classic"><span class="cat-sprite"></span></span>
+          <h4 class="cat-card-title">Kipling Classic</h4>
+        </div>
+        <p>Charmerende hoteller med god standard, personlig atmosfære og en fin beliggenhed. Ofte mindre og familiedrevne — vores klassikere gennem årene, hvor du får ægte oplevelse frem for luksus.</p>
+      </div>
+      <div class="cat-card">
+        <div class="cat-card-head">
+          <span class="cat-card-badge plus"><span class="cat-sprite"></span></span>
+          <h4 class="cat-card-title">Kipling Plus</h4>
+        </div>
+        <p>Et niveau over Classic. Rummeligere værelser, flere faciliteter (pool, restaurant, bar) og bedre komfort — men stadig med Kiplings personlige tilgang. For dig der vil have lidt mere plads og bekvemmelighed.</p>
+      </div>
+      <div class="cat-card">
+        <div class="cat-card-head">
+          <span class="cat-card-badge premium"><span class="cat-sprite"></span></span>
+          <h4 class="cat-card-title">Kipling Premium</h4>
+        </div>
+        <p>Vores fineste hoteller. Førsteklasses beliggenhed, luksuriøse værelser og enestående service. Her forkæler du dig selv — perfekte til bryllupsrejser, mærkedage eller når rejsen skal være helt særlig.</p>
+      </div>
+    </div>
+  </section>
+
   <p class="mockup-note">
-    Mockup — layoutet er komponenten. Hoteldata kommer fra CMS/DB. Alle kort åbner samme popup her for demo.
+    Mockup — layoutet er komponenten. Hoteldata og forklaringstekster kommer fra CMS/DB.
   </p>
 
   <!-- MODAL -->
@@ -542,47 +629,45 @@
   </div>
 
   <script>
-    // 9 hoteller matchet med de 9 uploadede billeder
+    // Hoteldata — billeder trukket direkte fra kiplingtravel.dk
+    const CDN = 'https://www.kiplingtravel.dk';
     const HOTELS = [
-      { name: 'Langi Langi Beach Resort',      loc: 'Nungwi',     cat: 'classic', img: 'Billeder/hoteller/image.png',   subtitle: 'Klassiker med træterrasse ud over havet' },
-      { name: 'The Z Hotel',                   loc: 'Nungwi',     cat: 'plus',    img: 'Billeder/hoteller/image-1.png', subtitle: 'Moderne boutiquehotel direkte på stranden' },
-      { name: 'Royal Zanzibar Beach Resort',   loc: 'Nungwi',     cat: 'plus',    img: 'Billeder/hoteller/image-2.png', subtitle: 'Rummeligt resort med stor pool og all-inclusive' },
-      { name: 'Nungwi Beach Resort by Turaco', loc: 'Nungwi',     cat: 'plus',    img: 'Billeder/hoteller/image-3.png', subtitle: 'Familievenligt strandresort på nordkysten' },
-      { name: 'Gold Zanzibar',                 loc: 'Kendwa',     cat: 'premium', img: 'Billeder/hoteller/image-4.png', subtitle: 'Luksusresort med bade hele døgnet' },
-      { name: 'Hotel Serena Zanzibar',         loc: 'Stone Town', cat: 'premium', img: 'Billeder/hoteller/image-5.png', subtitle: 'Historisk luksushotel i hjertet af Stone Town' },
-      { name: 'Mahali Beach Hotel',            loc: 'Paje',       cat: 'classic', img: 'Billeder/hoteller/image-6.png', subtitle: 'Intimt hotel ud til den brede Paje-strand' },
-      { name: 'Zanzibar Retreat',              loc: 'Matemwe',    cat: 'classic', img: 'Billeder/hoteller/image-7.png', subtitle: 'Charmerende boutique med lokal stemning' },
-      { name: 'Dhow Palace Hotel',             loc: 'Stone Town', cat: 'classic', img: 'Billeder/hoteller/image-8.png', subtitle: 'Autentisk swahili-arkitektur og tagterrasse' },
-    ];
+      { name: 'Langi Langi Beach Resort',      loc: 'Nungwi',     cat: 'classic', img: '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-langilangi/896_640/2015-Tanzania-Kipling-MH-082-2-c-1453202138.webp?scale=c196f086df9d8c1ccf5ae59c05ac1426f33d523b&org_extension=jpg', subtitle: 'Klassiker med træterrasse ud over havet' },
+      { name: 'The Z Hotel',                   loc: 'Nungwi',     cat: 'plus',    img: '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-zhotel/896_640/Nungwi-Z-Hotel-Zanzibar-KiplingTravelj-pool-2-c-1636038439.webp?scale=9b1ae22c4d1b7276330947455838a611047c47fd&org_extension=jpg', subtitle: 'Moderne boutiquehotel direkte på stranden' },
+      { name: 'Royal Zanzibar Beach Resort',   loc: 'Nungwi',     cat: 'plus',    img: '/app/webroot/_resized/uploads/galleri/royal-zanzibar-beach-resort-nungwi/896_640/Royal-Zanzibar-pool-Nungwi-2-c-1655804481.webp?scale=8ef56f65b462f51ecd76fe5bceea6e37fc1ad361&org_extension=jpg', subtitle: 'Rummeligt resort med stor pool' },
+      { name: 'Nungwi Beach Resort by Turaco', loc: 'Nungwi',     cat: 'plus',    img: '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-doubletree-by-hilton/896_640/DoubleTree-By-Hilton-Zanzibar-KiplingTravel-strand-2-c-1580808481.webp?scale=2e63ebe2177187e99ba0e46894e70028b25e3ef6&org_extension=jpg', subtitle: 'Familievenligt strandresort på nordkysten' },
+      { name: 'Gold Zanzibar',                 loc: 'Kendwa',     cat: 'premium', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/gold-zanzibar-kendwa/896_640/pool-udsigt-2-c-1426774429.webp?scale=81ca49e5a8247f3b9c6b7379e45ae31d9b323d65&org_extension=jpg', subtitle: 'Luksusresort med bade hele døgnet' },
+      { name: 'Tembo Hotel',                   loc: 'Stone Town', cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/tembo-hotel-stonetown/896_640/restaurant-2-c-1434014860.webp?scale=fbad028479476cbe848f9bfca38fbb77a2afa059&org_extension=jpg', subtitle: 'Klassisk hotel ved havnen i Stone Town' },
+      { name: 'Dhow Palace Hotel',             loc: 'Stone Town', cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/dhow-palace/896_640/tagterrasse-aften-2-c-1434012940.webp?scale=729d9d25ba2ac2f1b5849923a97fe4811b39ee79&org_extension=jpg', subtitle: 'Autentisk swahili-arkitektur og tagterrasse' },
+      { name: 'Sunset Bungalows',              loc: 'Kendwa',     cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/sunset-bungalows/896_640/strand-bar-2-c-1434022314.webp?scale=d005c3e1abadafc998ffd690a1951ef79f992342&org_extension=jpg', subtitle: 'Uformelle bungalower direkte ved stranden' },
+      { name: 'Mahali Beach Hotel',            loc: 'Paje',       cat: 'classic', img: '/app/webroot/_resized/uploads/galleri/mahali-beach-paje/896_640/Mahali-Zanzibar-Paje-Pajestranden-KiplingTravel-2-c-1686905279.webp?scale=8759d8d0212798f73aafe4d90576ccde40e74092&org_extension=jpg', subtitle: 'Intimt hotel ud til den brede Paje-strand' },
+      { name: 'Pongwe Beach Hotel',            loc: 'Pongwe',     cat: 'plus',    img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/pongwe-beach-hotel/896_640/pool-2-c-1426777293.webp?scale=7de706bd85d2c073b36bc7dcd802d188495ced80&org_extension=jpg', subtitle: 'Roligt hotel i skyggen af palmerne' },
+      { name: 'Hotel Serena Zanzibar',         loc: 'Stone Town', cat: 'premium', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/hotel-serena/896_640/pool-1-2-c-1434017127.webp?scale=eaf62a77386d723be9b1540511022219966cb43b&org_extension=jpg', subtitle: 'Historisk luksushotel i hjertet af Stone Town' },
+      { name: 'Karafuu Beach Resort',          loc: 'Pingwe',     cat: 'plus',    img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/karafuu-hotel-beach-resort/896_640/pool-2-c-1434018454.webp?scale=a6b4c3756e576b96f4418c7394ea00839b7fae90&org_extension=JPG', subtitle: 'Stort resort på østkysten' },
+      { name: 'Sultan Sands',                  loc: 'Kiwengwa',   cat: 'plus',    img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/sultan-sands-bluebay-beach-resort/896_640/reception-2-c-1434014446.webp?scale=36f2c73285d3e3c001c499c57db9f354e5919c3a&org_extension=jpg', subtitle: 'All-inclusive med bred palmestrand' },
+      { name: 'Zanzibar Retreat',              loc: 'Matemwe',    cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/zanzibar-retreat/896_640/terrasse-udsigt-2-c-1441627200.webp?scale=92309a4bd11a49ce11267f42a883b2eeb2494fdc&org_extension=jpg', subtitle: 'Charmerende boutique med lokal stemning' },
+      { name: 'Matemwe Beach Village',         loc: 'Matemwe',    cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/matemwe-beach-village/896_640/lounge-omraade-2-c-1434024571.webp?scale=7912c9ca3b6222530153c9eb0dcbdfa89d995d43&org_extension=JPG', subtitle: 'Afslappet landsby-stemning ved stranden' },
+      { name: 'Zawadi Beach Villa',            loc: 'Matemwe',    cat: 'premium', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/896_640/Zawadi-Beach-Vilas-Zanzibar-KiplingTravel20161017_0387-2-c-1487602710.webp?scale=c69e03706c0e2a3dc31d99e3135109ce1df7503c&org_extension=JPG', subtitle: 'Eksklusive private villaer med havudsigt' },
+    ].map(h => ({ ...h, img: CDN + h.img }));
 
     const CAT_LABELS = { classic: 'Kipling Classic', plus: 'Kipling Plus', premium: 'Kipling Premium' };
     const LOCATION_SVG = '<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>';
 
-    // Render hotelgrid
+    // Render hotelgrid (minimal: image + kategori-ikon + titel)
     const grid = document.getElementById('hotelGrid');
     HOTELS.forEach(h => {
       const card = document.createElement('button');
       card.className = 'card';
       card.dataset.cat = h.cat;
+      card.setAttribute('type', 'button');
       card.innerHTML = `
         <div class="card-image">
           <img src="${h.img}" alt="${h.name}" loading="lazy">
-          <div class="card-badges-left">
-            <span class="pill pill-location">
-              <span class="pill-location-icon">${LOCATION_SVG}</span>
-              <span class="pill-location-text">${h.loc}</span>
-            </span>
-            <span class="pill pill-category ${h.cat}">
-              <span class="cat-sprite"></span>
-              ${CAT_LABELS[h.cat]}
-            </span>
-          </div>
+          <span class="cat-badge ${h.cat}" title="${CAT_LABELS[h.cat]}">
+            <span class="cat-sprite"></span>
+          </span>
         </div>
-        <div class="card-content">
-          <h3 class="card-title">${h.name}</h3>
-          <p class="card-subtitle">${h.subtitle}</p>
-          <span class="card-link">Læs mere <span class="arrow">›</span></span>
-        </div>
+        <h3 class="card-title">${h.name}</h3>
       `;
       card.addEventListener('click', () => openModal(h));
       grid.appendChild(card);
