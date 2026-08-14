@@ -137,25 +137,44 @@
       transform: translateY(-1px);
       box-shadow: 0 3px 8px rgba(0,0,0,0.14);
     }
-    /* Alle tre filter-piller: samme neutrale dæmpede grå — kun ikonet skiller dem ad */
-    .filter-pill {
-      background: rgba(60, 55, 50, 0.75);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
+    /* Filter-piller: hele pillen er kategori-farvet, hvid ikon-cirkel med farvet ikon i */
+    .filter-pill { padding: 4px 18px 4px 4px; }
+    .filter-pill[data-cat="classic"] { background: #F0832C; }
+    .filter-pill[data-cat="plus"]    { background: #D7CC63; }
+    .filter-pill[data-cat="premium"] { background: #152C12; }
+
     .filter-pill .cat-sprite {
-      width: 24px;
-      height: 24px;
-      background-image: url('Billeder/kipling-kategorier.svg');
-      background-size: 72.8px 24px;
-      background-repeat: no-repeat;
-      background-color: rgba(0,0,0,0.28);
+      width: 28px;
+      height: 28px;
+      background: #fff;
       border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
+      position: relative;
     }
-    .filter-pill[data-cat="classic"] .cat-sprite { background-position: 0 0; }
-    .filter-pill[data-cat="plus"]    .cat-sprite { background-position: -24.5px 0; }
-    .filter-pill[data-cat="premium"] .cat-sprite { background-position: -49px 0; }
+    .filter-pill .cat-sprite::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      -webkit-mask: url('Billeder/kipling-kategorier.svg') no-repeat;
+              mask: url('Billeder/kipling-kategorier.svg') no-repeat;
+      -webkit-mask-size: 54.6px 18px;
+              mask-size: 54.6px 18px;
+    }
+    .filter-pill[data-cat="classic"] .cat-sprite::before {
+      background: #F0832C;
+      -webkit-mask-position: 0 0; mask-position: 0 0;
+    }
+    .filter-pill[data-cat="plus"] .cat-sprite::before {
+      background: #D7CC63;
+      -webkit-mask-position: -18.4px 0; mask-position: -18.4px 0;
+    }
+    .filter-pill[data-cat="premium"] .cat-sprite::before {
+      background: #152C12;
+      -webkit-mask-position: -36.8px 0; mask-position: -36.8px 0;
+    }
     .category-filters.has-active .filter-pill:not(.active) { opacity: 0.4; }
 
     /* Grid — 4 per row */
@@ -238,14 +257,15 @@
     .card-cat-icon {
       width: 40px; height: 40px;
       border-radius: 50%;
-      background: rgba(217, 217, 217, 0.2);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
+    /* Farvet ikon-cirkel pr. kategori */
+    .card-cat.classic .card-cat-icon { background: #F0832C; }
+    .card-cat.plus    .card-cat-icon { background: #D7CC63; }
+    .card-cat.premium .card-cat-icon { background: #152C12; }
     .card-cat-icon .cat-sprite {
       width: 24px; height: 24px;
       background-image: url('Billeder/kipling-kategorier.svg');
@@ -611,8 +631,10 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      background: #55524e;
     }
+    .cat-card-badge.classic { background: #F0832C; }
+    .cat-card-badge.plus    { background: #D7CC63; }
+    .cat-card-badge.premium { background: #152C12; }
     .cat-card-badge .cat-sprite {
       width: 26px; height: 26px;
       background-image: url('Billeder/kipling-kategorier.svg');
