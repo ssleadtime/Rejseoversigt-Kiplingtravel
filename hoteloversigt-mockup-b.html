@@ -250,7 +250,7 @@
       color: #fff;
       font-weight: 700;
       font-size: 14px;
-      padding-left: 10px;
+      padding-left: 0;
       max-width: 0;
       overflow: hidden;
       opacity: 0;
@@ -260,7 +260,11 @@
     .card:hover .card-cat-text {
       max-width: 200px;
       opacity: 1;
+      padding-left: 10px;
     }
+    /* I hvile: ingen padding-right på pillen, så den bliver en perfekt cirkel */
+    .card-cat { padding-right: 3px; }
+    .card:hover .card-cat { padding-right: 14px; }
 
     /* Hotelnavn — altid synligt oven på billedet */
     .card-title {
