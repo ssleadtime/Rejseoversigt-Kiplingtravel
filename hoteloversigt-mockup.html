@@ -3,34 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hoteloversigt — Zanzibar mockup</title>
+  <title>Hoteloversigt — mockup</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
 
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
     body {
+      margin: 0;
       font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: #f5f0e6;
       color: #2c2c2c;
-      line-height: 1.55;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
     body.modal-open { overflow: hidden; }
 
     .container {
-      max-width: 1320px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 40px 24px 80px;
     }
 
     /* Header */
-    .hotel-header { margin-bottom: 28px; }
-    .hotel-header h1 {
+    .hotel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .hotel-header h2 {
       font-weight: 700;
-      font-size: 34px;
-      margin: 0 0 8px;
-      line-height: 1.15;
+      font-size: 32px;
+      margin: 0 0 6px;
+      color: #2c2c2c;
     }
     .hotel-header p {
       margin: 0;
@@ -39,61 +46,63 @@
       max-width: 720px;
     }
 
-    /* Category filter row (optional filter — mirrors rejseoversigt pattern) */
+    /* Category filter row */
     .category-filters {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin: 22px 0 8px;
-      align-items: center;
+      gap: 8px;
+      margin: 18px 0 8px;
     }
     .filter-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 18px 8px 6px;
+      gap: 6px;
+      padding: 5px 14px 5px 4px;
       border: none;
       border-radius: 50px;
       color: #fff;
-      font-weight: 600;
-      font-size: 13px;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.1px;
       cursor: pointer;
-      transition: opacity 0.22s ease, transform 0.18s ease, box-shadow 0.18s ease;
+      transition: opacity 0.22s ease, transform 0.15s ease, box-shadow 0.15s ease;
       font-family: inherit;
+      line-height: 1;
     }
     .filter-pill:hover {
-      transform: translateY(-1.2px);
-      box-shadow: 0 2.4px 7.2px rgba(0,0,0,0.144);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.14);
     }
-    .filter-pill:active { transform: scale(0.97); }
-    .filter-pill[data-cat="classic"] { background: #6a8c50; }
+    .filter-pill[data-cat="classic"] { background: #70763F; }
     .filter-pill[data-cat="plus"]    { background: #4a4543; }
-    .filter-pill[data-cat="premium"] { background: #b8860b; }
-    .filter-pill .cat-icon {
-      width: 24px; height: 24px;
+    .filter-pill[data-cat="premium"] { background: #B8860B; }
+    .filter-pill .cat-sprite {
+      width: 22px;
+      height: 22px;
+      background-image: url('Billeder/kipling-kategorier.svg');
+      background-size: 66.7px 22px;
+      background-repeat: no-repeat;
       border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       flex-shrink: 0;
     }
-    .filter-pill .cat-icon svg { width: 14px; height: 14px; fill: #fff; }
+    .filter-pill[data-cat="classic"] .cat-sprite { background-position: 0 0; }
+    .filter-pill[data-cat="plus"]    .cat-sprite { background-position: -22.5px 0; }
+    .filter-pill[data-cat="premium"] .cat-sprite { background-position: -45px 0; }
     .category-filters.has-active .filter-pill:not(.active) { opacity: 0.4; }
 
-    /* Grid */
+    /* Grid — 4 per row */
     .hotel-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-top: 24px;
+      gap: 22px;
+      margin-top: 22px;
     }
     @media (max-width: 1100px) { .hotel-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 820px)  { .hotel-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 520px)  { .hotel-grid { grid-template-columns: 1fr; } }
 
-    /* Hotel card */
-    .hotel-card {
+    /* Card — same base as relaterede-rejser */
+    .card {
       background: #fff;
       border-radius: 8px;
       overflow: hidden;
@@ -109,34 +118,36 @@
       font-family: inherit;
       text-align: left;
       padding: 0;
+      width: 100%;
     }
-    .hotel-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
 
-    .hotel-card-image {
+    .card-image {
       position: relative;
       aspect-ratio: 4/3;
       overflow: hidden;
     }
-    .hotel-card-image img {
-      width: 100%; height: 100%;
+    .card-image img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       transition: transform 0.5s ease;
     }
-    .hotel-card:hover .hotel-card-image img { transform: scale(1.05); }
+    .card:hover .card-image img { transform: scale(1.04); }
 
-    /* Overlay pills (top-left = location, top-right = category) */
-    .hotel-card-badges-left {
+    /* Overlay pills top-left (stacked) */
+    .card-badges-left {
       position: absolute;
-      top: 12px; left: 12px;
+      top: 12px;
+      left: 12px;
       z-index: 2;
-    }
-    .hotel-card-badges-right {
-      position: absolute;
-      top: 12px; right: 12px;
-      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
     }
 
     .pill {
@@ -146,63 +157,96 @@
       border-radius: 50px;
       font-size: 12px;
       font-weight: 700;
+      letter-spacing: 0.1px;
       line-height: 1;
       white-space: nowrap;
     }
+
+    /* Location pill: transparent white with backdrop-blur (samme mønster som pill-leader) */
     .pill-location {
-      background: rgba(255,255,255,0.9);
-      color: #2c2c2c;
-      padding: 6px 12px 6px 8px;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .pill-location svg { width: 12px; height: 12px; fill: #FF9900; }
-    .pill-category {
+      background: rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       color: #fff;
-      padding: 5px 12px 5px 4px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      padding: 0;
+      gap: 0;
     }
-    .pill-category .cat-icon {
-      width: 22px; height: 22px;
+    .pill-location-icon {
+      width: 28px;
+      height: 28px;
+      margin: 3px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.18);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
-    .pill-category .cat-icon svg { width: 12px; height: 12px; fill: #fff; }
-    .pill-category.classic { background: #6a8c50; }
+    .pill-location-icon svg { width: 13px; height: 13px; fill: #fff; }
+    .pill-location-text {
+      padding: 0 12px 0 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Category pill: colored bg with icon in transparent circle (samme mønster som pill-country) */
+    .pill-category {
+      color: #fff;
+      padding: 5px 14px 5px 4px;
+    }
+    .pill-category .cat-sprite {
+      width: 22px;
+      height: 22px;
+      background-image: url('Billeder/kipling-kategorier.svg');
+      background-size: 66.7px 22px;
+      background-repeat: no-repeat;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .pill-category.classic { background: #70763F; }
     .pill-category.plus    { background: #4a4543; }
-    .pill-category.premium { background: #b8860b; }
+    .pill-category.premium { background: #B8860B; }
+    .pill-category.classic .cat-sprite { background-position: 0 0; }
+    .pill-category.plus    .cat-sprite { background-position: -22.5px 0; }
+    .pill-category.premium .cat-sprite { background-position: -45px 0; }
 
     /* Card content */
-    .hotel-card-content {
-      padding: 16px 18px 18px;
+    .card-content {
+      padding: 18px 20px 20px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 12px;
       flex: 1;
     }
-    .hotel-card-title {
+    .card-title {
       font-weight: 700;
-      font-size: 17px;
-      margin: 0;
-      color: #2c2c2c;
+      font-size: 18px;
       line-height: 1.25;
+      color: #2c2c2c;
+      margin: 0;
     }
-    .hotel-card-cta {
+    .card-subtitle {
+      font-size: 13px;
+      color: #6c6258;
+      margin: -6px 0 0;
+      line-height: 1.4;
+    }
+    .card-link {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-weight: 700;
-      font-size: 13px;
       color: #2c2c2c;
-      margin-top: 4px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: auto;
+      padding-top: 4px;
     }
-    .hotel-card-cta .arrow { color: #FF9900; transition: transform 0.2s ease; }
-    .hotel-card:hover .hotel-card-cta .arrow { transform: translateX(3px); }
+    .card-link .arrow {
+      color: #FF9900;
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+    .card:hover .card-link .arrow { transform: translateX(4px); }
 
     /* ═══════════════════════════════════════════════════════════════
        MODAL / POPUP
@@ -222,10 +266,7 @@
       opacity: 0;
       transition: opacity 0.25s ease;
     }
-    .modal-backdrop.open {
-      display: flex;
-      opacity: 1;
-    }
+    .modal-backdrop.open { display: flex; opacity: 1; }
 
     .modal {
       background: #fff;
@@ -241,7 +282,6 @@
     }
     .modal-backdrop.open .modal { transform: translateY(0); }
 
-    /* Close button */
     .modal-close {
       position: fixed;
       top: 24px; right: 24px;
@@ -260,11 +300,8 @@
     .modal-close:hover { background: #fff; transform: scale(1.06); }
     .modal-close svg { width: 20px; height: 20px; fill: #2c2c2c; }
 
-    /* Modal image gallery */
-    .modal-gallery {
-      position: relative;
-      background: #000;
-    }
+    /* Modal gallery */
+    .modal-gallery { position: relative; background: #000; }
     .modal-gallery-main {
       aspect-ratio: 16/9;
       position: relative;
@@ -315,15 +352,10 @@
       transition: border-color 0.15s;
     }
     .gallery-thumbs button.active { border-color: #FF9900; }
-    .gallery-thumbs img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
+    .gallery-thumbs img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* Modal header */
-    .modal-body {
-      padding: 26px 32px 32px;
-    }
+    /* Modal body */
+    .modal-body { padding: 26px 32px 32px; }
     @media (max-width: 620px) { .modal-body { padding: 22px 20px 24px; } }
 
     .modal-header-row {
@@ -351,6 +383,15 @@
       flex-wrap: wrap;
       align-items: center;
     }
+    /* In modal, override transparent bg to grey for readability against white */
+    .modal-meta .pill-location {
+      background: rgba(0,0,0,0.05);
+      color: #2c2c2c;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .modal-meta .pill-location-icon { background: rgba(0,0,0,0.06); }
+    .modal-meta .pill-location-icon svg { fill: #FF9900; }
 
     .modal-description {
       margin-top: 18px;
@@ -360,7 +401,6 @@
     }
     .modal-description p { margin: 0 0 12px; }
     .modal-description p:last-child { margin-bottom: 0; }
-    .modal-description a { color: #FF9900; font-weight: 600; }
 
     /* Alternative hotels */
     .modal-alt {
@@ -402,10 +442,7 @@
       overflow: hidden;
       margin-bottom: 8px;
     }
-    .alt-card-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
+    .alt-card-img img { width: 100%; height: 100%; object-fit: cover; }
     .alt-card-cat {
       position: absolute;
       top: 8px; left: 8px;
@@ -413,29 +450,30 @@
       font-size: 10px;
       gap: 4px;
     }
-    .alt-card-cat .cat-icon { width: 16px; height: 16px; }
-    .alt-card-cat .cat-icon svg { width: 9px; height: 9px; }
+    .alt-card-cat .cat-sprite { width: 16px; height: 16px; background-size: 48.5px 16px; }
+    .alt-card-cat.classic .cat-sprite { background-position: 0 0; }
+    .alt-card-cat.plus    .cat-sprite { background-position: -16.4px 0; }
+    .alt-card-cat.premium .cat-sprite { background-position: -32.8px 0; }
     .alt-card-title {
       font-size: 13px;
       font-weight: 600;
       color: #2c2c2c;
       line-height: 1.3;
     }
+    .alt-card-loc {
+      font-size: 11px;
+      color: #8a8175;
+      margin-top: 2px;
+    }
 
-    /* Note banner (small footer note, only in mockup) */
+    /* Note (only in mockup) */
     .mockup-note {
-      max-width: 1320px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 0 24px 40px;
       color: #8a8175;
       font-size: 13px;
       text-align: center;
-    }
-    .mockup-note code {
-      background: rgba(0,0,0,0.05);
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-size: 12px;
     }
   </style>
 </head>
@@ -443,37 +481,26 @@
 
   <div class="container">
     <div class="hotel-header">
-      <h1>Strandhoteller på Zanzibar</h1>
-      <p>Vi udvælger vores hoteller efter kvalitet, beliggenhed og stemning. Klik på et hotel for at se detaljer.</p>
+      <div>
+        <h2>Strandhoteller på Zanzibar</h2>
+        <p>Vi udvælger vores hoteller efter kvalitet, beliggenhed og stemning. Klik på et hotel for at se detaljer.</p>
+      </div>
     </div>
 
     <div class="category-filters">
-      <button class="filter-pill" data-cat="classic" type="button">
-        <span class="cat-icon"><svg viewBox="0 0 24 24"><path d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9zM5.6 10.25c0 1.38 1.12 2.5 2.5 2.5.53 0 1.01-.16 1.42-.44l-.02.19c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5l-.02-.19c.4.28.89.44 1.42.44 1.38 0 2.5-1.12 2.5-2.5 0-1-.59-1.85-1.43-2.25.84-.4 1.43-1.25 1.43-2.25 0-1.38-1.12-2.5-2.5-2.5-.53 0-1.01.16-1.42.44l.02-.19C14.5 2.62 13.38 1.5 12 1.5S9.5 2.62 9.5 4c0 .07.01.13.02.19-.4-.28-.89-.44-1.42-.44-1.38 0-2.5 1.12-2.5 2.5 0 1 .59 1.85 1.43 2.25-.84.4-1.43 1.25-1.43 2.25zM12 5.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5S9.5 9.38 9.5 8s1.12-2.5 2.5-2.5zM3 13c0 4.97 4.03 9 9 9 0-4.97-4.03-9-9-9z"/></svg></span>
-        Kipling Classic
-      </button>
-      <button class="filter-pill" data-cat="plus" type="button">
-        <span class="cat-icon"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span>
-        Kipling Plus
-      </button>
-      <button class="filter-pill" data-cat="premium" type="button">
-        <span class="cat-icon"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span>
-        Kipling Premium
-      </button>
+      <button class="filter-pill" data-cat="classic" type="button"><span class="cat-sprite"></span>Kipling Classic</button>
+      <button class="filter-pill" data-cat="plus" type="button"><span class="cat-sprite"></span>Kipling Plus</button>
+      <button class="filter-pill" data-cat="premium" type="button"><span class="cat-sprite"></span>Kipling Premium</button>
     </div>
 
-    <div class="hotel-grid" id="hotelGrid">
-      <!-- Cards populated by JS from HOTELS array below -->
-    </div>
+    <div class="hotel-grid" id="hotelGrid"></div>
   </div>
 
   <p class="mockup-note">
-    Mockup — layoutet er komponenten. Hoteldata kommer fra CMS/DB. Alle kort åbner samme popup her (viser Langi Langi's data) for demo.
+    Mockup — layoutet er komponenten. Hoteldata kommer fra CMS/DB. Alle kort åbner samme popup her for demo.
   </p>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       MODAL (initialt skjult, åbnes ved klik på et hotelkort)
-       ═══════════════════════════════════════════════════════════════ -->
+  <!-- MODAL -->
   <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <button class="modal-close" id="modalClose" aria-label="Luk">
       <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
@@ -495,23 +522,14 @@
         <div class="modal-header-row">
           <div class="modal-title-block">
             <h2 id="modalTitle">Langi Langi Beach Resort</h2>
-            <p class="subtitle">Kipling-klassiker ved havet i Nungwi</p>
+            <p class="subtitle" id="modalSubtitle">Kipling-klassiker ved havet i Nungwi</p>
           </div>
-          <div class="modal-meta">
-            <span class="pill pill-location">
-              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
-              Nungwi, Zanzibar
-            </span>
-            <span class="pill pill-category classic">
-              <span class="cat-icon"><svg viewBox="0 0 24 24"><path d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9zM5.6 10.25c0 1.38 1.12 2.5 2.5 2.5.53 0 1.01-.16 1.42-.44l-.02.19c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5l-.02-.19c.4.28.89.44 1.42.44 1.38 0 2.5-1.12 2.5-2.5 0-1-.59-1.85-1.43-2.25.84-.4 1.43-1.25 1.43-2.25 0-1.38-1.12-2.5-2.5-2.5-.53 0-1.01.16-1.42.44l.02-.19C14.5 2.62 13.38 1.5 12 1.5S9.5 2.62 9.5 4c0 .07.01.13.02.19-.4-.28-.89-.44-1.42-.44-1.38 0-2.5 1.12-2.5 2.5 0 1 .59 1.85 1.43 2.25-.84.4-1.43 1.25-1.43 2.25zM12 5.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5S9.5 9.38 9.5 8s1.12-2.5 2.5-2.5zM3 13c0 4.97 4.03 9 9 9 0-4.97-4.03-9-9-9z"/></svg></span>
-              Kipling Classic
-            </span>
-          </div>
+          <div class="modal-meta" id="modalMeta"></div>
         </div>
 
-        <div class="modal-description">
+        <div class="modal-description" id="modalDescription">
           <p>Langi Langi ligger lidt nord for Kendwa i midten af Nungwi. Langi Langi som vi har arbejdet tæt sammen med alle årene, er en rigtig Kipling klassiker med en fantastisk smuk beliggenhed direkte ud til havet. Seaview værelserne som vi bruger, ligger direkte ud mod vandet og er store og lyse og har desuden en lille balkon eller veranda.</p>
-          <p>Inde i den frodige have ligger standardværelserne, samme swimmingpool og en lille pool-bar. Langi Langi har en Open Air restaurant bygget på en stor træterrasse direkte ud over vandet og stranden, som giver en fantastisk eksotisk stemning. Mens solnedgangen nydes, serveres her frisk seafood og en række andre gode retter.</p>
+          <p>Inde i den frodige have ligger standardværelserne, samme swimmingpool og en lille pool-bar. Langi Langi har en Open Air restaurant bygget på en stor træterrasse direkte ud over vandet og stranden, som giver en fantastisk eksotisk stemning.</p>
           <p>Stranden "under" hotellet er ikke stor, men virkelig god — og vandet er selvfølgelig i absolut særklasse. Bedst af alt: ingen tidevandsproblematik som på østkysten. Ved Langi Langi kan man bade hele døgnet rundt.</p>
         </div>
 
@@ -524,78 +542,53 @@
   </div>
 
   <script>
-    // Hoteldata (i produktion trukket fra CMS)
-    const CDN = 'https://www.kiplingtravel.dk';
+    // 9 hoteller matchet med de 9 uploadede billeder
     const HOTELS = [
-      { name: 'Langi Langi Beach Resort',        loc: 'Nungwi',      cat: 'classic', img: '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-langilangi/896_640/2015-Tanzania-Kipling-MH-082-2-c-1453202138.webp?scale=c196f086df9d8c1ccf5ae59c05ac1426f33d523b&org_extension=jpg' },
-      { name: 'The Z Hotel',                     loc: 'Nungwi',      cat: 'plus',    img: '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-zhotel/896_640/Nungwi-Z-Hotel-Zanzibar-KiplingTravelj-pool-2-c-1636038439.webp?scale=9b1ae22c4d1b7276330947455838a611047c47fd&org_extension=jpg' },
-      { name: 'Royal Zanzibar Beach Resort',     loc: 'Nungwi',      cat: 'plus',    img: '/app/webroot/_resized/uploads/galleri/royal-zanzibar-beach-resort-nungwi/896_640/Royal-Zanzibar-pool-Nungwi-2-c-1655804481.webp?scale=8ef56f65b462f51ecd76fe5bceea6e37fc1ad361&org_extension=jpg' },
-      { name: 'Nungwi Beach Resort by Turaco',   loc: 'Nungwi',      cat: 'plus',    img: '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-doubletree-by-hilton/896_640/DoubleTree-By-Hilton-Zanzibar-KiplingTravel-strand-2-c-1580808481.webp?scale=2e63ebe2177187e99ba0e46894e70028b25e3ef6&org_extension=jpg' },
-      { name: 'Gold Zanzibar',                   loc: 'Kendwa',      cat: 'plus',    img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/gold-zanzibar-kendwa/896_640/pool-udsigt-2-c-1426774429.webp?scale=81ca49e5a8247f3b9c6b7379e45ae31d9b323d65&org_extension=jpg' },
-      { name: 'Tembo Hotel',                     loc: 'Stone Town',  cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/tembo-hotel-stonetown/896_640/restaurant-2-c-1434014860.webp?scale=fbad028479476cbe848f9bfca38fbb77a2afa059&org_extension=jpg' },
-      { name: 'Dhow Palace Hotel',               loc: 'Stone Town',  cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/dhow-palace/896_640/tagterrasse-aften-2-c-1434012940.webp?scale=729d9d25ba2ac2f1b5849923a97fe4811b39ee79&org_extension=jpg' },
-      { name: 'Sunset Bungalows',                loc: 'Kendwa',      cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/sunset-bungalows/896_640/strand-bar-2-c-1434022314.webp?scale=d005c3e1abadafc998ffd690a1951ef79f992342&org_extension=jpg' },
-      { name: 'Mahali Beach Hotel',              loc: 'Paje',        cat: 'classic', img: '/app/webroot/_resized/uploads/galleri/mahali-beach-paje/896_640/Mahali-Zanzibar-Paje-Pajestranden-KiplingTravel-2-c-1686905279.webp?scale=8759d8d0212798f73aafe4d90576ccde40e74092&org_extension=jpg' },
-      { name: 'Pongwe Beach Hotel',              loc: 'Pongwe',      cat: 'plus',    img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/pongwe-beach-hotel/896_640/pool-2-c-1426777293.webp?scale=7de706bd85d2c073b36bc7dcd802d188495ced80&org_extension=jpg' },
-      { name: 'Hotel Serena Zanzibar',           loc: 'Stone Town',  cat: 'premium', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/hotel-serena/896_640/pool-1-2-c-1434017127.webp?scale=eaf62a77386d723be9b1540511022219966cb43b&org_extension=jpg' },
-      { name: 'Karafuu Hotel Beach Resort',      loc: 'Pingwe',      cat: 'plus',    img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/karafuu-hotel-beach-resort/896_640/pool-2-c-1434018454.webp?scale=a6b4c3756e576b96f4418c7394ea00839b7fae90&org_extension=JPG' },
-      { name: 'Sultan Sands og Bluebay',         loc: 'Kiwengwa',    cat: 'plus',    img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/sultan-sands-bluebay-beach-resort/896_640/reception-2-c-1434014446.webp?scale=36f2c73285d3e3c001c499c57db9f354e5919c3a&org_extension=jpg' },
-      { name: 'Zanzibar Retreat',                loc: 'Matemwe',     cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/zanzibar-retreat/896_640/terrasse-udsigt-2-c-1441627200.webp?scale=92309a4bd11a49ce11267f42a883b2eeb2494fdc&org_extension=jpg' },
-      { name: 'Matemwe Beach Village',           loc: 'Matemwe',     cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/matemwe-beach-village/896_640/lounge-omraade-2-c-1434024571.webp?scale=7912c9ca3b6222530153c9eb0dcbdfa89d995d43&org_extension=JPG' },
-      { name: 'Zawadi Beach Villa',              loc: 'Matemwe',     cat: 'classic', img: '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/896_640/Zawadi-Beach-Vilas-Zanzibar-KiplingTravel20161017_0387-2-c-1487602710.webp?scale=c69e03706c0e2a3dc31d99e3135109ce1df7503c&org_extension=JPG' },
+      { name: 'Langi Langi Beach Resort',      loc: 'Nungwi',     cat: 'classic', img: 'Billeder/hoteller/image.png',   subtitle: 'Klassiker med træterrasse ud over havet' },
+      { name: 'The Z Hotel',                   loc: 'Nungwi',     cat: 'plus',    img: 'Billeder/hoteller/image-1.png', subtitle: 'Moderne boutiquehotel direkte på stranden' },
+      { name: 'Royal Zanzibar Beach Resort',   loc: 'Nungwi',     cat: 'plus',    img: 'Billeder/hoteller/image-2.png', subtitle: 'Rummeligt resort med stor pool og all-inclusive' },
+      { name: 'Nungwi Beach Resort by Turaco', loc: 'Nungwi',     cat: 'plus',    img: 'Billeder/hoteller/image-3.png', subtitle: 'Familievenligt strandresort på nordkysten' },
+      { name: 'Gold Zanzibar',                 loc: 'Kendwa',     cat: 'premium', img: 'Billeder/hoteller/image-4.png', subtitle: 'Luksusresort med bade hele døgnet' },
+      { name: 'Hotel Serena Zanzibar',         loc: 'Stone Town', cat: 'premium', img: 'Billeder/hoteller/image-5.png', subtitle: 'Historisk luksushotel i hjertet af Stone Town' },
+      { name: 'Mahali Beach Hotel',            loc: 'Paje',       cat: 'classic', img: 'Billeder/hoteller/image-6.png', subtitle: 'Intimt hotel ud til den brede Paje-strand' },
+      { name: 'Zanzibar Retreat',              loc: 'Matemwe',    cat: 'classic', img: 'Billeder/hoteller/image-7.png', subtitle: 'Charmerende boutique med lokal stemning' },
+      { name: 'Dhow Palace Hotel',             loc: 'Stone Town', cat: 'classic', img: 'Billeder/hoteller/image-8.png', subtitle: 'Autentisk swahili-arkitektur og tagterrasse' },
     ];
 
-    // Gallery-billeder til Langi Langi (popup demo-data)
-    const LANGILANGI_GALLERY = [
-      '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-langilangi/1500_650/2015-Tanzania-Kipling-MH-082-2-c-1453202138.webp?scale=9c56e9286c8da24923394424ebe2aafd1049b972&org_extension=jpg',
-      '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-langilangi/1500_650/LangiLangi-Maharbasuite-KiplingTravel-2-c-1737117531.webp?scale=966fb629771600f2835b06aa4417d03bc509ee1a&org_extension=jpg',
-      '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-langilangi/1500_650/LangiLangi-Nungwi-Zanzibar-KiplingTravel-2-c-1737117958.webp?scale=1f41947dbc2dbae46917cebafc8759302b590266&org_extension=jpg',
-      '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-langilangi/1500_650/LangiLangi-Seaview-Marharba-KiplingTravel-2-c-1636037726.webp?scale=4491ad6f29183cd18cb41774692aaa1caed9f234&org_extension=jpg',
-      '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-langilangi/1500_650/LangiLangi-pool-KiplingTravel-2-c-1607342954.webp?scale=c77b660cbe164d402c1e3d25513fa02010d1c62a&org_extension=jpg',
-      '/app/webroot/_resized/uploads/galleri/hotel-afrika-zanzibar-langilangi/1500_650/LangiLangibeachresort-KiplingTravel-2-c-1640602295.webp?scale=15322a49c338e12e9c93128b0a3bb17db536928d&org_extension=jpg',
-      '/app/webroot/_resized/uploads/afrika/tanzania/hoteller/langi-langi/1500_650/langi-langi_terrasse-havudsigt-01-2-c-1428563449.webp?scale=6b102c87cfaff103989dd20ca31e10461d1c0a87&org_extension=jpg',
-    ];
-
-    // SVG-templates til kategori-ikoner
-    const CAT_ICONS = {
-      classic: '<svg viewBox="0 0 24 24"><path d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9zM5.6 10.25c0 1.38 1.12 2.5 2.5 2.5.53 0 1.01-.16 1.42-.44l-.02.19c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5l-.02-.19c.4.28.89.44 1.42.44 1.38 0 2.5-1.12 2.5-2.5 0-1-.59-1.85-1.43-2.25.84-.4 1.43-1.25 1.43-2.25 0-1.38-1.12-2.5-2.5-2.5-.53 0-1.01.16-1.42.44l.02-.19C14.5 2.62 13.38 1.5 12 1.5S9.5 2.62 9.5 4c0 .07.01.13.02.19-.4-.28-.89-.44-1.42-.44-1.38 0-2.5 1.12-2.5 2.5 0 1 .59 1.85 1.43 2.25-.84.4-1.43 1.25-1.43 2.25zM12 5.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5S9.5 9.38 9.5 8s1.12-2.5 2.5-2.5zM3 13c0 4.97 4.03 9 9 9 0-4.97-4.03-9-9-9z"/></svg>',
-      plus:    '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>',
-      premium: '<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>',
-    };
     const CAT_LABELS = { classic: 'Kipling Classic', plus: 'Kipling Plus', premium: 'Kipling Premium' };
+    const LOCATION_SVG = '<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>';
 
-    // --- Render hotelgrid ---
+    // Render hotelgrid
     const grid = document.getElementById('hotelGrid');
     HOTELS.forEach(h => {
       const card = document.createElement('button');
-      card.className = 'hotel-card';
+      card.className = 'card';
       card.dataset.cat = h.cat;
       card.innerHTML = `
-        <div class="hotel-card-image">
-          <img src="${CDN}${h.img}" alt="${h.name}" loading="lazy">
-          <div class="hotel-card-badges-left">
+        <div class="card-image">
+          <img src="${h.img}" alt="${h.name}" loading="lazy">
+          <div class="card-badges-left">
             <span class="pill pill-location">
-              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
-              ${h.loc}
+              <span class="pill-location-icon">${LOCATION_SVG}</span>
+              <span class="pill-location-text">${h.loc}</span>
             </span>
-          </div>
-          <div class="hotel-card-badges-right">
             <span class="pill pill-category ${h.cat}">
-              <span class="cat-icon">${CAT_ICONS[h.cat]}</span>
+              <span class="cat-sprite"></span>
               ${CAT_LABELS[h.cat]}
             </span>
           </div>
         </div>
-        <div class="hotel-card-content">
-          <h3 class="hotel-card-title">${h.name}</h3>
-          <span class="hotel-card-cta">Læs mere <span class="arrow">›</span></span>
+        <div class="card-content">
+          <h3 class="card-title">${h.name}</h3>
+          <p class="card-subtitle">${h.subtitle}</p>
+          <span class="card-link">Læs mere <span class="arrow">›</span></span>
         </div>
       `;
       card.addEventListener('click', () => openModal(h));
       grid.appendChild(card);
     });
 
-    // --- Filter-logik ---
+    // Filter
     const filterContainer = document.querySelector('.category-filters');
     const activeFilters = new Set();
     document.querySelectorAll('.filter-pill').forEach(pill => {
@@ -604,51 +597,68 @@
         if (activeFilters.has(cat)) { activeFilters.delete(cat); pill.classList.remove('active'); }
         else { activeFilters.add(cat); pill.classList.add('active'); }
         filterContainer.classList.toggle('has-active', activeFilters.size > 0);
-        document.querySelectorAll('.hotel-card').forEach(c => {
-          if (activeFilters.size === 0 || activeFilters.has(c.dataset.cat)) c.style.display = '';
-          else c.style.display = 'none';
+        document.querySelectorAll('.card').forEach(c => {
+          c.style.display = (activeFilters.size === 0 || activeFilters.has(c.dataset.cat)) ? '' : 'none';
         });
       });
     });
 
-    // --- Modal / popup logik ---
+    // Modal
     const backdrop = document.getElementById('modalBackdrop');
     const closeBtn = document.getElementById('modalClose');
     const galleryMain = document.getElementById('galleryMain');
     const galleryThumbs = document.getElementById('galleryThumbs');
     const altScroller = document.getElementById('altScroller');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
 
     function openModal(hotel) {
-      // Populer gallery (bruger Langi Langi's billeder som demo — i produktion: hotel.gallery)
+      modalTitle.textContent = hotel.name;
+      modalSubtitle.textContent = hotel.subtitle;
+
+      modalMeta.innerHTML = `
+        <span class="pill pill-location">
+          <span class="pill-location-icon">${LOCATION_SVG}</span>
+          <span class="pill-location-text">${hotel.loc}, Zanzibar</span>
+        </span>
+        <span class="pill pill-category ${hotel.cat}">
+          <span class="cat-sprite"></span>
+          ${CAT_LABELS[hotel.cat]}
+        </span>
+      `;
+
+      // Gallery bruger alle 9 billeder som demo
       galleryMain.innerHTML = '';
       galleryThumbs.innerHTML = '';
-      LANGILANGI_GALLERY.forEach((src, i) => {
+      HOTELS.forEach((h, i) => {
         const img = document.createElement('img');
-        img.src = CDN + src;
+        img.src = h.img;
         img.alt = hotel.name + ' billede ' + (i + 1);
         if (i === 0) img.classList.add('active');
         galleryMain.appendChild(img);
 
         const thumb = document.createElement('button');
-        thumb.innerHTML = `<img src="${CDN}${src}" alt="" loading="lazy">`;
+        thumb.innerHTML = `<img src="${h.img}" alt="" loading="lazy">`;
         if (i === 0) thumb.classList.add('active');
         thumb.addEventListener('click', () => showImage(i));
         galleryThumbs.appendChild(thumb);
       });
 
-      // Populer alternative hoteller (alle undtagen det klikkede)
+      // Alternative hoteller — alle undtagen det klikkede
       altScroller.innerHTML = '';
-      HOTELS.filter(h => h.name !== hotel.name).slice(0, 10).forEach(alt => {
+      HOTELS.filter(h => h.name !== hotel.name).forEach(alt => {
         const c = document.createElement('button');
         c.className = 'alt-card';
         c.innerHTML = `
           <div class="alt-card-img">
-            <img src="${CDN}${alt.img}" alt="${alt.name}" loading="lazy">
+            <img src="${alt.img}" alt="${alt.name}" loading="lazy">
             <span class="pill pill-category alt-card-cat ${alt.cat}">
-              <span class="cat-icon">${CAT_ICONS[alt.cat]}</span>
+              <span class="cat-sprite"></span>
             </span>
           </div>
           <div class="alt-card-title">${alt.name}</div>
+          <div class="alt-card-loc">${alt.loc}</div>
         `;
         c.addEventListener('click', () => openModal(alt));
         altScroller.appendChild(c);
@@ -656,7 +666,6 @@
 
       backdrop.classList.add('open');
       document.body.classList.add('modal-open');
-      // scroll modal til toppen når man skifter hotel
       document.getElementById('modalContent').scrollTop = 0;
     }
 
