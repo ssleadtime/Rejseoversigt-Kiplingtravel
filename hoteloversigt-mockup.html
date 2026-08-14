@@ -103,13 +103,13 @@
     .filter-pill {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 5px 24px 5px 5px;
+      gap: 6px;
+      padding: 4px 18px 4px 4px;
       border: none;
       border-radius: 50px;
       color: #fff;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 13px;
       letter-spacing: 0.1px;
       cursor: pointer;
       transition: opacity 0.22s ease, transform 0.15s ease, box-shadow 0.15s ease;
@@ -126,8 +126,8 @@
     .filter-pill[data-cat="premium"] { background: #152C12; }
 
     .filter-pill .cat-sprite {
-      width: 40px;
-      height: 40px;
+      width: 28px;
+      height: 28px;
       background: #fff;
       border-radius: 50%;
       display: inline-flex;
@@ -138,12 +138,12 @@
     }
     .filter-pill .cat-sprite::before {
       content: '';
-      width: 26px;
-      height: 26px;
+      width: 18px;
+      height: 18px;
       -webkit-mask: url('Billeder/kipling-kategorier.svg') no-repeat;
               mask: url('Billeder/kipling-kategorier.svg') no-repeat;
-      -webkit-mask-size: 78.9px 26px;
-              mask-size: 78.9px 26px;
+      -webkit-mask-size: 54.6px 18px;
+              mask-size: 54.6px 18px;
     }
     .filter-pill[data-cat="classic"] .cat-sprite::before {
       background: #F0832C;
@@ -151,11 +151,11 @@
     }
     .filter-pill[data-cat="plus"] .cat-sprite::before {
       background: #D7CC63;
-      -webkit-mask-position: -26.5px 0; mask-position: -26.5px 0;
+      -webkit-mask-position: -18.4px 0; mask-position: -18.4px 0;
     }
     .filter-pill[data-cat="premium"] .cat-sprite::before {
       background: #152C12;
-      -webkit-mask-position: -53px 0; mask-position: -53px 0;
+      -webkit-mask-position: -36.8px 0; mask-position: -36.8px 0;
     }
     .category-filters.has-active .filter-pill:not(.active) { opacity: 0.4; }
 
