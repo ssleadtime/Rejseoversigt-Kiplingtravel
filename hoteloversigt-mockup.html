@@ -134,7 +134,7 @@
     }
     .card:hover .card-image img { transform: scale(1.04); }
 
-    /* Category icon: bare cirkel med ikon, ingen tekst-label */
+    /* Category icon: bare cirkel med ikon, ingen tekst-label — vises i hvile */
     .cat-badge {
       position: absolute;
       bottom: 14px;
@@ -147,7 +147,9 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: opacity 0.22s ease;
     }
+    .card:hover .cat-badge { opacity: 0; }
     .cat-badge.classic { background: #70763F; }
     .cat-badge.plus    { background: #4a4543; }
     .cat-badge.premium { background: #B8860B; }
@@ -161,6 +163,60 @@
     .cat-badge.classic .cat-sprite { background-position: 0 0; }
     .cat-badge.plus    .cat-sprite { background-position: -24.5px 0; }
     .cat-badge.premium .cat-sprite { background-position: -49px 0; }
+
+    /* Hover-overlay: kategori-navn + "Læs mere" — vises kun ved hover */
+    .card-hover-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0) 75%);
+      opacity: 0;
+      transition: opacity 0.22s ease;
+      pointer-events: none;
+    }
+    .card:hover .card-hover-overlay { opacity: 1; }
+    .card-hover-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .card-hover-cat .cat-dot {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-hover-cat .cat-dot.classic { background: #70763F; }
+    .card-hover-cat .cat-dot.plus    { background: #4a4543; }
+    .card-hover-cat .cat-dot.premium { background: #B8860B; }
+    .card-hover-cat .cat-dot .cat-sprite {
+      width: 14px; height: 14px;
+      background-image: url('Billeder/kipling-kategorier.svg');
+      background-size: 42.5px 14px;
+      background-repeat: no-repeat;
+    }
+    .card-hover-cat .cat-dot.classic .cat-sprite { background-position: 0 0; }
+    .card-hover-cat .cat-dot.plus    .cat-sprite { background-position: -14.3px 0; }
+    .card-hover-cat .cat-dot.premium .cat-sprite { background-position: -28.6px 0; }
+    .card-hover-cta {
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-hover-cta .arrow { color: #FF9900; }
 
     /* Card title — direkte på baggrunden, ingen kort-blok */
     .card-title {
@@ -437,41 +493,20 @@
       margin-top: 2px;
     }
 
-    /* Læs mere-link ved filtre */
-    .cat-info-link {
-      margin-left: 4px;
-      color: #6c6258;
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 6px 8px;
-      font-family: inherit;
-      transition: color 0.15s ease;
-    }
-    .cat-info-link:hover { color: #FF9900; }
-
-    /* Kategori-forklaringer nederst */
+    /* Kategori-forklaringer (nu øverst, mellem intro og filtre) */
     .cat-explainer {
-      max-width: 1280px;
-      margin: 60px auto 0;
-      padding: 44px 24px 20px;
-      border-top: 1px solid #eae1cf;
-      scroll-margin-top: 20px;
+      margin: 24px 0 8px;
     }
     .cat-explainer h3 {
       font-weight: 700;
-      font-size: 22px;
+      font-size: 20px;
       margin: 0 0 6px;
       color: #2c2c2c;
     }
     .cat-explainer > p {
       color: #6c6258;
-      font-size: 15px;
-      margin: 0 0 28px;
+      font-size: 14px;
+      margin: 0 0 18px;
       max-width: 720px;
     }
     .cat-explainer-grid {
@@ -545,43 +580,42 @@
       </div>
     </div>
 
+    <section class="cat-explainer">
+      <h3>Vores hotelkategorier</h3>
+      <p>Vi klassificerer alle hoteller efter tre niveauer, så du hurtigt kan se hvad du kan forvente.</p>
+      <div class="cat-explainer-grid">
+        <div class="cat-card">
+          <div class="cat-card-head">
+            <span class="cat-card-badge classic"><span class="cat-sprite"></span></span>
+            <h4 class="cat-card-title">Kipling Classic</h4>
+          </div>
+          <p>Charmerende hoteller med god standard, personlig atmosfære og en fin beliggenhed. Ofte mindre og familiedrevne — vores klassikere gennem årene, hvor du får ægte oplevelse frem for luksus.</p>
+        </div>
+        <div class="cat-card">
+          <div class="cat-card-head">
+            <span class="cat-card-badge plus"><span class="cat-sprite"></span></span>
+            <h4 class="cat-card-title">Kipling Plus</h4>
+          </div>
+          <p>Et niveau over Classic. Rummeligere værelser, flere faciliteter (pool, restaurant, bar) og bedre komfort — men stadig med Kiplings personlige tilgang. For dig der vil have lidt mere plads og bekvemmelighed.</p>
+        </div>
+        <div class="cat-card">
+          <div class="cat-card-head">
+            <span class="cat-card-badge premium"><span class="cat-sprite"></span></span>
+            <h4 class="cat-card-title">Kipling Premium</h4>
+          </div>
+          <p>Vores fineste hoteller. Førsteklasses beliggenhed, luksuriøse værelser og enestående service. Her forkæler du dig selv — perfekte til bryllupsrejser, mærkedage eller når rejsen skal være helt særlig.</p>
+        </div>
+      </div>
+    </section>
+
     <div class="category-filters">
       <button class="filter-pill" data-cat="classic" type="button"><span class="cat-sprite"></span>Kipling Classic</button>
       <button class="filter-pill" data-cat="plus" type="button"><span class="cat-sprite"></span>Kipling Plus</button>
       <button class="filter-pill" data-cat="premium" type="button"><span class="cat-sprite"></span>Kipling Premium</button>
-      <button class="cat-info-link" type="button" onclick="document.getElementById('catExplainer').scrollIntoView({behavior:'smooth', block:'start'})">Læs mere om kategorierne ↓</button>
     </div>
 
     <div class="hotel-grid" id="hotelGrid"></div>
   </div>
-
-  <section class="cat-explainer" id="catExplainer">
-    <h3>Vores hotelkategorier</h3>
-    <p>Vi klassificerer alle hoteller efter tre niveauer, så du hurtigt kan se hvad du kan forvente.</p>
-    <div class="cat-explainer-grid">
-      <div class="cat-card">
-        <div class="cat-card-head">
-          <span class="cat-card-badge classic"><span class="cat-sprite"></span></span>
-          <h4 class="cat-card-title">Kipling Classic</h4>
-        </div>
-        <p>Charmerende hoteller med god standard, personlig atmosfære og en fin beliggenhed. Ofte mindre og familiedrevne — vores klassikere gennem årene, hvor du får ægte oplevelse frem for luksus.</p>
-      </div>
-      <div class="cat-card">
-        <div class="cat-card-head">
-          <span class="cat-card-badge plus"><span class="cat-sprite"></span></span>
-          <h4 class="cat-card-title">Kipling Plus</h4>
-        </div>
-        <p>Et niveau over Classic. Rummeligere værelser, flere faciliteter (pool, restaurant, bar) og bedre komfort — men stadig med Kiplings personlige tilgang. For dig der vil have lidt mere plads og bekvemmelighed.</p>
-      </div>
-      <div class="cat-card">
-        <div class="cat-card-head">
-          <span class="cat-card-badge premium"><span class="cat-sprite"></span></span>
-          <h4 class="cat-card-title">Kipling Premium</h4>
-        </div>
-        <p>Vores fineste hoteller. Førsteklasses beliggenhed, luksuriøse værelser og enestående service. Her forkæler du dig selv — perfekte til bryllupsrejser, mærkedage eller når rejsen skal være helt særlig.</p>
-      </div>
-    </div>
-  </section>
 
   <p class="mockup-note">
     Mockup — layoutet er komponenten. Hoteldata og forklaringstekster kommer fra CMS/DB.
@@ -666,6 +700,13 @@
           <span class="cat-badge ${h.cat}" title="${CAT_LABELS[h.cat]}">
             <span class="cat-sprite"></span>
           </span>
+          <div class="card-hover-overlay">
+            <span class="card-hover-cat">
+              <span class="cat-dot ${h.cat}"><span class="cat-sprite"></span></span>
+              ${CAT_LABELS[h.cat]}
+            </span>
+            <span class="card-hover-cta">Læs mere <span class="arrow">›</span></span>
+          </div>
         </div>
         <h3 class="card-title">${h.name}</h3>
       `;
